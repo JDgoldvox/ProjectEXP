@@ -55,6 +55,11 @@ SpriteAtlas:
     - 45c88e48d1d23e545a5c317cffc449b2: -2003606797
     - 45c88e48d1d23e545a5c317cffc449b2: -239719059
     - 45c88e48d1d23e545a5c317cffc449b2: -587202987
+    - 09d41a4ddbe058046af942f11063a5ae: -1454722199
+    - 09d41a4ddbe058046af942f11063a5ae: -628916470
+    - 09d41a4ddbe058046af942f11063a5ae: 1869545574
+    - 09d41a4ddbe058046af942f11063a5ae: -1596240085
+    - 09d41a4ddbe058046af942f11063a5ae: -636289658
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
   - {fileID: -2133227697, guid: 45c88e48d1d23e545a5c317cffc449b2, type: 3}
@@ -75,6 +80,11 @@ SpriteAtlas:
   - {fileID: -2003606797, guid: 45c88e48d1d23e545a5c317cffc449b2, type: 3}
   - {fileID: -239719059, guid: 45c88e48d1d23e545a5c317cffc449b2, type: 3}
   - {fileID: -587202987, guid: 45c88e48d1d23e545a5c317cffc449b2, type: 3}
+  - {fileID: -1454722199, guid: 09d41a4ddbe058046af942f11063a5ae, type: 3}
+  - {fileID: -628916470, guid: 09d41a4ddbe058046af942f11063a5ae, type: 3}
+  - {fileID: 1869545574, guid: 09d41a4ddbe058046af942f11063a5ae, type: 3}
+  - {fileID: -1596240085, guid: 09d41a4ddbe058046af942f11063a5ae, type: 3}
+  - {fileID: -636289658, guid: 09d41a4ddbe058046af942f11063a5ae, type: 3}
   m_PackedSpriteNamesToIndex:
   - Hub_10
   - Hub_11
@@ -94,6 +104,11 @@ SpriteAtlas:
   - Hub_4
   - Hub_7
   - Hub_6
+  - treesMk1_2
+  - treesMk1_3
+  - treesMk1_0
+  - treesMk1_1
+  - treesMk1_4
   m_RenderDataMap: {}
   m_Tag: HubAtlas
   m_IsVariant: 0
