@@ -71,6 +71,24 @@ public partial class @GameInputActionAsset: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Save"",
+                    ""type"": ""Button"",
+                    ""id"": ""fd2802fd-d241-4d15-bfa8-9286efd2cb27"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Load"",
+                    ""type"": ""Button"",
+                    ""id"": ""6b817c25-5ba3-4514-a003-924043c9e54a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -172,6 +190,28 @@ public partial class @GameInputActionAsset: IInputActionCollection2, IDisposable
                     ""action"": ""RightClick"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""15368571-86e3-4657-aafd-3355301027bd"",
+                    ""path"": ""<Keyboard>/f1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Save"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8043ea5f-e268-42b3-9e7f-65592d0abfd6"",
+                    ""path"": ""<Keyboard>/f2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Load"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -185,6 +225,8 @@ public partial class @GameInputActionAsset: IInputActionCollection2, IDisposable
         m_Player_Run = m_Player.FindAction("Run", throwIfNotFound: true);
         m_Player_LeftClick = m_Player.FindAction("LeftClick", throwIfNotFound: true);
         m_Player_RightClick = m_Player.FindAction("RightClick", throwIfNotFound: true);
+        m_Player_Save = m_Player.FindAction("Save", throwIfNotFound: true);
+        m_Player_Load = m_Player.FindAction("Load", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -251,6 +293,8 @@ public partial class @GameInputActionAsset: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Run;
     private readonly InputAction m_Player_LeftClick;
     private readonly InputAction m_Player_RightClick;
+    private readonly InputAction m_Player_Save;
+    private readonly InputAction m_Player_Load;
     public struct PlayerActions
     {
         private @GameInputActionAsset m_Wrapper;
@@ -260,6 +304,8 @@ public partial class @GameInputActionAsset: IInputActionCollection2, IDisposable
         public InputAction @Run => m_Wrapper.m_Player_Run;
         public InputAction @LeftClick => m_Wrapper.m_Player_LeftClick;
         public InputAction @RightClick => m_Wrapper.m_Player_RightClick;
+        public InputAction @Save => m_Wrapper.m_Player_Save;
+        public InputAction @Load => m_Wrapper.m_Player_Load;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -284,6 +330,12 @@ public partial class @GameInputActionAsset: IInputActionCollection2, IDisposable
             @RightClick.started += instance.OnRightClick;
             @RightClick.performed += instance.OnRightClick;
             @RightClick.canceled += instance.OnRightClick;
+            @Save.started += instance.OnSave;
+            @Save.performed += instance.OnSave;
+            @Save.canceled += instance.OnSave;
+            @Load.started += instance.OnLoad;
+            @Load.performed += instance.OnLoad;
+            @Load.canceled += instance.OnLoad;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -303,6 +355,12 @@ public partial class @GameInputActionAsset: IInputActionCollection2, IDisposable
             @RightClick.started -= instance.OnRightClick;
             @RightClick.performed -= instance.OnRightClick;
             @RightClick.canceled -= instance.OnRightClick;
+            @Save.started -= instance.OnSave;
+            @Save.performed -= instance.OnSave;
+            @Save.canceled -= instance.OnSave;
+            @Load.started -= instance.OnLoad;
+            @Load.performed -= instance.OnLoad;
+            @Load.canceled -= instance.OnLoad;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -327,5 +385,7 @@ public partial class @GameInputActionAsset: IInputActionCollection2, IDisposable
         void OnRun(InputAction.CallbackContext context);
         void OnLeftClick(InputAction.CallbackContext context);
         void OnRightClick(InputAction.CallbackContext context);
+        void OnSave(InputAction.CallbackContext context);
+        void OnLoad(InputAction.CallbackContext context);
     }
 }

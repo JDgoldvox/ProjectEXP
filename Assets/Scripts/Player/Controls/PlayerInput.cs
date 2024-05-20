@@ -14,12 +14,17 @@ public class PlayerInput : MonoBehaviour
     [field: SerializeField] public bool runInput { get; private set; }
     [field: SerializeField] public bool leftClickInput { get; private set; }
     [field: SerializeField] public bool rightClickInput { get; private set; }
+    [field: SerializeField] public bool saveInput { get; private set; }
+    [field: SerializeField] public bool loadInput { get; private set; }
+
 
     private InputAction fireAction;
     private InputAction moveAction;
     private InputAction runAction;
     private InputAction leftClickAction;
     private InputAction rightClickAction;
+    private InputAction saveAction;
+    private InputAction loadAction;
 
     [field: SerializeField] public Vector3 lastMouseScreenPosition { get; private set; } = new Vector3();
     [field: SerializeField] public Vector3 lastMouseWorldPosition { get; private set; } = new Vector3();
@@ -43,6 +48,8 @@ public class PlayerInput : MonoBehaviour
         runAction = myInputActionAsset.Player.Run;
         leftClickAction = myInputActionAsset.Player.LeftClick;
         rightClickAction = myInputActionAsset.Player.RightClick;
+        saveAction = myInputActionAsset.Player.Save;
+        loadAction = myInputActionAsset.Player.Load;
 
         RegisterInputActions();
     }
@@ -54,6 +61,8 @@ public class PlayerInput : MonoBehaviour
         runAction.Enable();
         leftClickAction.Enable();
         rightClickAction.Enable();
+        saveAction.Enable();
+        loadAction.Enable();
     }
 
     private void OnDisable()
@@ -63,11 +72,12 @@ public class PlayerInput : MonoBehaviour
         runAction.Disable();
         leftClickAction.Disable();
         rightClickAction.Disable();
+        saveAction.Disable();
+        loadAction.Disable();
     }
 
     void Update()
     {
-
         if (fireAction.WasPerformedThisFrame())
         {
             fireInput = true;
@@ -103,18 +113,29 @@ public class PlayerInput : MonoBehaviour
             rightClickInput = false;
         }
 
-
-        //other script
-        if (leftClickInput)
+        if (saveAction.WasPerformedThisFrame())
         {
-            Debug.Log("left clicking");
+            saveInput = true;
+        }
+        else
+        {
+            saveInput = false;
         }
 
-        //other script
-        if (rightClickInput)
+        if (loadAction.WasPerformedThisFrame())
         {
-            Debug.Log("right clicking");
+            loadInput = true;
         }
+        else
+        {
+            loadInput = false;
+        }
+        
+        if(loadInput)
+        {
+            Debug.Log("Load action button pressed");
+        }
+
     }
 
     /// <summary>
