@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static System.Collections.Specialized.BitVector32;
 
 public class PlayerInput : MonoBehaviour
 {
@@ -11,10 +12,17 @@ public class PlayerInput : MonoBehaviour
     [field: SerializeField] public Vector2 moveInput { get; private set; }
     [field: SerializeField] public bool fireInput { get; private set; }
     [field: SerializeField] public bool runInput { get; private set; }
+    [field: SerializeField] public bool leftClickInput { get; private set; }
+    [field: SerializeField] public bool rightClickInput { get; private set; }
 
     private InputAction fireAction;
     private InputAction moveAction;
     private InputAction runAction;
+    private InputAction leftClickAction;
+    private InputAction rightClickAction;
+
+    [field: SerializeField] public Vector3 lastMouseScreenPosition { get; private set; } = new Vector3();
+    [field: SerializeField] public Vector3 lastMouseWorldPosition { get; private set; } = new Vector3();
 
     private void Awake()
     {
@@ -33,6 +41,8 @@ public class PlayerInput : MonoBehaviour
         fireAction = myInputActionAsset.Player.Fire;
         moveAction = myInputActionAsset.Player.Move;
         runAction = myInputActionAsset.Player.Run;
+        leftClickAction = myInputActionAsset.Player.LeftClick;
+        rightClickAction = myInputActionAsset.Player.RightClick;
 
         RegisterInputActions();
     }
@@ -42,7 +52,8 @@ public class PlayerInput : MonoBehaviour
         fireAction.Enable();
         moveAction.Enable();
         runAction.Enable();
-        
+        leftClickAction.Enable();
+        rightClickAction.Enable();
     }
 
     private void OnDisable()
@@ -50,6 +61,8 @@ public class PlayerInput : MonoBehaviour
         fireAction.Disable();
         moveAction.Disable();
         runAction.Disable();
+        leftClickAction.Disable();
+        rightClickAction.Disable();
     }
 
     void Update()
@@ -69,6 +82,39 @@ public class PlayerInput : MonoBehaviour
         {
             Debug.Log("Firing");
         }
+
+        if (leftClickAction.WasPerformedThisFrame())
+        {
+            CalculateScreenAndWorldMousePosition();
+            leftClickInput = true;
+        }
+        else
+        {
+            leftClickInput = false;
+        }
+
+        if (rightClickAction.WasPerformedThisFrame())
+        {
+            CalculateScreenAndWorldMousePosition();
+            rightClickInput = true;
+        }
+        else
+        {
+            rightClickInput = false;
+        }
+
+
+        //other script
+        if (leftClickInput)
+        {
+            Debug.Log("left clicking");
+        }
+
+        //other script
+        if (rightClickInput)
+        {
+            Debug.Log("right clicking");
+        }
     }
 
     /// <summary>
@@ -86,5 +132,11 @@ public class PlayerInput : MonoBehaviour
 
         runAction.performed += context => runInput = true;
         runAction.canceled += context => runInput = false;
+    }
+
+    private void CalculateScreenAndWorldMousePosition()
+    {
+        lastMouseScreenPosition = Mouse.current.position.ReadValue();
+        lastMouseWorldPosition = Camera.main.ScreenToWorldPoint(lastMouseScreenPosition);
     }
 }
