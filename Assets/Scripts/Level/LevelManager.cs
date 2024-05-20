@@ -5,6 +5,8 @@ using UnityEngine.Tilemaps;
 using System.Linq;
 using System.IO;
 
+// BUGS: IDS MUST EXIST FOR ALL TILES OR ELSE IT WILL NOT WORK
+
 /// <summary>
 /// This script allows game object to save a json of the tile map which allows us to load and create new ones
 /// </summary>
@@ -12,7 +14,9 @@ public class LevelManager : MonoBehaviour
 {
     public static LevelManager Instance;
     public Tilemap tilemap;
+    public List<CustomTile> tileIDs = new List<CustomTile>(); // Scriptable object which holds tile base and id
 
+    //current path names
     private const string LEVEL_DATA_FILE_PATH = "/Level/Custom/";
     private const string HUB_LEVEL_FILE_NAME = "hub.json";
 
@@ -51,22 +55,24 @@ public class LevelManager : MonoBehaviour
             for (int y = bounds.min.y; y < bounds.max.y; y++)
             {
                 //track current position inside the tilemap
-                TileBase currentPos = tilemap.GetTile(new Vector3Int(x, y, 0));
+                TileBase currentTile = tilemap.GetTile(new Vector3Int(x, y, 0));
+
+                CustomTile currentCustomTile = tileIDs.Find(t => t.tile == currentTile);
 
                 //add info to our tile list
-                if(currentPos != null)
+                if(currentTile != null)
                 {
-                    levelData.tiles.Add(currentPos);
-                    levelData.positions.Add(new Vector3Int(x, y, 0));
+                    Debug.Log(currentCustomTile.id);
+                    levelData.tiles.Add(currentCustomTile.id);
+                    levelData.posX.Add(x);
+                    levelData.posY.Add(y);
                 }
             }
         }
 
         //convert level data to json file to store
         string json = JsonUtility.ToJson(levelData, true);
-
         File.WriteAllText(Application.dataPath + LEVEL_DATA_FILE_PATH + HUB_LEVEL_FILE_NAME, json);
-        Debug.Log("file saved at: " + Application.dataPath + LEVEL_DATA_FILE_PATH + HUB_LEVEL_FILE_NAME);
     }
 
     private void LoadLevel()
@@ -80,9 +86,11 @@ public class LevelManager : MonoBehaviour
         tilemap.ClearAllTiles();
 
         //setting all tiles
-        for(int i = 0; i < data.positions.Count; i++ )
+        for(int i = 0; i < data.tiles.Count; i++)
         {
-            tilemap.SetTile(data.positions[i], data.tiles[i]);
+            //name is the scriptable object name we've given
+            CustomTile customTile = tileIDs.Find(t => t.name == data.tiles[i]);
+            tilemap.SetTile(new Vector3Int(data.posX[i], data.posY[i], 0), customTile.tile);
         }
     }
 }
@@ -90,8 +98,9 @@ public class LevelManager : MonoBehaviour
 public class LevelData
 {
     //List of the types of tiles stored
-    public List<TileBase> tiles = new List<TileBase>();
+    public List<string> tiles = new List<string>();
 
     //The position of the tile being stored
-    public List<Vector3Int> positions = new List<Vector3Int>();
+    public List<int> posY = new List<int>();
+    public List<int> posX = new List<int>();
 }

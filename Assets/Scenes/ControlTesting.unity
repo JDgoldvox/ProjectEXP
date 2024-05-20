@@ -2185,6 +2185,7 @@ MonoBehaviour:
   <leftClickInput>k__BackingField: 0
   <rightClickInput>k__BackingField: 0
   <saveInput>k__BackingField: 0
+  <loadInput>k__BackingField: 0
   <lastMouseScreenPosition>k__BackingField: {x: 0, y: 0, z: 0}
   <lastMouseWorldPosition>k__BackingField: {x: 0, y: 0, z: 0}
 --- !u!4 &1324428277
@@ -2399,6 +2400,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tilemap: {fileID: 1968448816}
+  tileIDs:
+  - {fileID: 11400000, guid: 46bc432619b25f640a687d2a160c5906, type: 2}
+  - {fileID: 11400000, guid: 83aea24930554bb48bf29b835de70141, type: 2}
 --- !u!1 &1968448813
 GameObject:
   m_ObjectHideFlags: 0
