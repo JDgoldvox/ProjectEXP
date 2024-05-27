@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.PlayerSettings;
 
 public class PlayerActions : MonoBehaviour
 {
@@ -20,6 +21,10 @@ public class PlayerActions : MonoBehaviour
         S_PlayerInput = PlayerInput.Instance;
     }
 
+    private void Update()
+    {
+        Plant();
+    }
 
     void FixedUpdate()
     {
@@ -35,6 +40,23 @@ public class PlayerActions : MonoBehaviour
         else //is walking
         {
             rb.AddForce(S_PlayerInput.moveInput * walkSpeed, ForceMode2D.Impulse);
+        }
+    }
+
+    void Plant()
+    {
+        if (S_PlayerInput.leftClickInput)
+        {
+            //create a new function within level editor
+            //that checks if tile exists in specific tile data (TileSpecificInfo)
+            //if this tile we are about to plant is plantable, allow us to plant
+
+            LevelEditor.Instance.PlaceTile();
+        }
+
+        if (S_PlayerInput.rightClickInput)
+        {
+            LevelEditor.Instance.SwitchTiles();
         }
     }
 }

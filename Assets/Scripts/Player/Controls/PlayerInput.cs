@@ -1,5 +1,7 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.XInput;
 using static System.Collections.Specialized.BitVector32;
 
 public class PlayerInput : MonoBehaviour
@@ -8,6 +10,8 @@ public class PlayerInput : MonoBehaviour
 
     [Header("Input Action Asset")]
     private GameInputActionAsset myInputActionAsset;
+
+    private Animator animator;
 
     [field: SerializeField] public Vector2 moveInput { get; private set; }
     [field: SerializeField] public bool fireInput { get; private set; }
@@ -29,17 +33,21 @@ public class PlayerInput : MonoBehaviour
     [field: SerializeField] public Vector3 lastMouseScreenPosition { get; private set; } = new Vector3();
     [field: SerializeField] public Vector3 lastMouseWorldPosition { get; private set; } = new Vector3();
 
+    private Vector2 lastDirection = new Vector2();
+
     private void Awake()
     {
         if(Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
+            DontDestroyOnLoad(this);
         }
         else
         {
-            Destroy(gameObject);
+            Destroy(this);
         }
+
+        animator = GetComponent<Animator>();
 
         myInputActionAsset = new GameInputActionAsset();
 
@@ -78,6 +86,8 @@ public class PlayerInput : MonoBehaviour
 
     void Update()
     {
+        AnimationStuff();
+
         if (fireAction.WasPerformedThisFrame())
         {
             fireInput = true;
@@ -148,9 +158,19 @@ public class PlayerInput : MonoBehaviour
         //we want to read value form the context given from the callback
         //we want to set moveInput using the read value of the context
 
-        moveAction.performed += context => moveInput = context.ReadValue<Vector2>();
+        //move
         moveAction.canceled += context => moveInput = Vector2.zero;
 
+        moveAction.canceled += context => animator.SetFloat("xInput", 0f);
+        moveAction.canceled += context => animator.SetFloat("yInput", 0f);
+
+        moveAction.performed += context => lastDirection = moveAction.ReadValue<Vector2>();
+
+        moveAction.performed += context => animator.SetBool("isMoving", true);
+        moveAction.canceled += context => animator.SetBool("isMoving", false);
+        
+
+        //run
         runAction.performed += context => runInput = true;
         runAction.canceled += context => runInput = false;
     }
@@ -159,5 +179,17 @@ public class PlayerInput : MonoBehaviour
     {
         lastMouseScreenPosition = Mouse.current.position.ReadValue();
         lastMouseWorldPosition = Camera.main.ScreenToWorldPoint(lastMouseScreenPosition);
+    }
+
+    private void AnimationStuff()
+    {
+        Debug.Log(lastDirection);
+        animator.SetFloat("lastXInput", lastDirection.x);
+        animator.SetFloat("lastYInput", lastDirection.y);
+
+        moveInput = moveAction.ReadValue<Vector2>();
+        animator.SetFloat("xInput", moveInput.x);
+        animator.SetFloat("yInput", moveInput.y);
+
     }
 }

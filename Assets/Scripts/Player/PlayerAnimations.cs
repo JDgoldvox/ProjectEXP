@@ -40,22 +40,22 @@ public class PlayerAnimations : MonoBehaviour
 
     private void Update()
     {
-        if (rb.velocity.x > 0) //walk right
-        {
-            animator.Play(PLAYER_WALK_RIGHT);
-        }
-        else if (rb.velocity.x < 0) // walk left
-        {
-            animator.Play(PLAYER_WALK_RIGHT);
-        }
+        //if (rb.velocity.x > 0) //walk right
+        //{
+        //    animator.Play(PLAYER_WALK_RIGHT);
+        //}
+        //else if (rb.velocity.x < 0) // walk left
+        //{
+        //    animator.Play(PLAYER_WALK_RIGHT);
+        //}
 
-        if(rb.velocity.y > 0) //walk down
-        {
-            animator.Play(PLAYER_WALK_BACKWARDS);
-        }
-        else if(rb.velocity.y < 0) //walk up
-        {
-            animator.Play(PLAYER_WALK_FORWARD);
-        }
+        //if(rb.velocity.y > 0) //walk down
+        //{
+        //    animator.Play(PLAYER_WALK_BACKWARDS);
+        //}
+        //else if(rb.velocity.y < 0) //walk up
+        //{
+        //    animator.Play(PLAYER_WALK_FORWARD);
+        //}
     }
 }

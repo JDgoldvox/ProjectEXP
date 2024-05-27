@@ -1777,6 +1777,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1408394410}
+  - {fileID: 1478715943}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1296245919
@@ -2274,7 +2275,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 100
-  m_Sprite: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
+  m_Sprite: {fileID: -640039986, guid: f6bf11f5cc2ba4b43b248ddc2b2a91a9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -2329,18 +2330,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.029273003, y: -0.70254874}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 1, y: 2}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.6319986, y: 0.29745173}
   m_EdgeRadius: 0
 --- !u!114 &1324428282
 MonoBehaviour:
@@ -2356,6 +2357,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentTileMap: {fileID: 1968448816}
   currentTile: {fileID: 11400000, guid: 3f327b22533b7d845965de66082bf827, type: 2}
+  tileA: {fileID: 11400000, guid: 80376b6d2583f9441b58c34374423e70, type: 2}
+  tileB: {fileID: 11400000, guid: 235f13ed10826c64192e2c95339896e9, type: 2}
   mainCamera: {fileID: 519420031}
 --- !u!95 &1324428283
 Animator:
@@ -2446,6 +2449,53 @@ MonoBehaviour:
   tileIDs:
   - {fileID: 11400000, guid: 46bc432619b25f640a687d2a160c5906, type: 2}
   - {fileID: 11400000, guid: 83aea24930554bb48bf29b835de70141, type: 2}
+  - {fileID: 11400000, guid: a3e21a80233b8ac40b19d0cf24818c15, type: 2}
+  - {fileID: 11400000, guid: b0b765a43fa340c41ac860488f8ca550, type: 2}
+--- !u!1 &1478715942
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1478715943}
+  - component: {fileID: 1478715944}
+  m_Layer: 0
+  m_Name: TileManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1478715943
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1478715942}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1240427421}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1478715944
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1478715942}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93cb1c0e771c8c4438c75674df755527, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soilTilemap: {fileID: 1968448816}
 --- !u!1 &1968448813
 GameObject:
   m_ObjectHideFlags: 0
