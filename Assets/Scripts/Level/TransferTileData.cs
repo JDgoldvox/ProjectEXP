@@ -9,5 +9,6 @@ public static class TransferTileData
         to.canSeed = from.canSeed;
         to.soilType = from.soilType;
         to.tileType = from.tileType;
+        to.id = from.id;
     }
 }

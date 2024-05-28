@@ -11,6 +11,8 @@ public class TileData
     public TILE_CATEGORIES tileType;
     public bool canSeed = true;
     public SOIL_TYPE soilType = SOIL_TYPE.EMPTY;
+
+    public string id;
 }
 
 public class TileSpecificInfo : MonoBehaviour
@@ -36,7 +38,6 @@ public class TileSpecificInfo : MonoBehaviour
     {
         BoundsInt bounds = soilTilemap.cellBounds;
         LevelData levelData = new LevelData();
-        Debug.Log("Ground tilemap bounds " + bounds);
 
         //loop through the entire tilemap
         for (int x = bounds.min.x; x < bounds.max.x; x++)
@@ -52,6 +53,12 @@ public class TileSpecificInfo : MonoBehaviour
                 }
             }
         }
+
+        foreach (TileData data in tileData.Values)
+        {
+            Debug.Log(data.id);
+        }
+
     }
 
     /// <summary>
