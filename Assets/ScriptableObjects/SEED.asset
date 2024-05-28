@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9e6126e5ff908bd4bb5d5b7f900f487c, type: 3}
-  m_Name: plantableTile
+  m_Name: SEED
   m_EditorClassIdentifier: 
-  tile: {fileID: 11400000, guid: 235f13ed10826c64192e2c95339896e9, type: 2}
-  id: plantable
-  tileType: 0
+  tile: {fileID: 11400000, guid: 80376b6d2583f9441b58c34374423e70, type: 2}
+  id: SEED
+  tileType: 1
   soilType: 1
   canSeed: 1

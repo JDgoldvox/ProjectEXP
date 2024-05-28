@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.ShaderGraph.Drawing;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -53,23 +54,24 @@ public class LevelEditor : MonoBehaviour
     /// </summary>
     public void PlaceTile()
     {
+        Vector3Int pos = currentTileMap.WorldToCell(S_PlayerInput.lastMouseWorldPosition);
         //early exit 
-        //Checks if the tile we are selecting is placable
-        if(!GetCurrentCustomTile().canSeed)
+        if (!IsTilePlaceable(pos))
         {
+
             return;
         }
-        
-        Vector3Int pos = currentTileMap.WorldToCell(S_PlayerInput.lastMouseWorldPosition);
+
+        Debug.Log("Tile is placeable...");
 
         //set this tile to new sprite
         currentTileMap.SetTile(pos, currentTile);
 
-        //add to dictionary of specific tile data
+        //add specific tile data to dictionary
         TileData specificTileData = new TileData();
         CustomTile customTile = GetCurrentCustomTile();
         TransferTileData.MoveData(customTile, ref specificTileData);
-        TileSpecificInfo.Instance.UpdateTilemapDictionary(pos, specificTileData);
+        TileSpecificInfo.Instance.AddToTilemapDictionary(pos, specificTileData);
     }
 
     /// <summary>
@@ -99,5 +101,73 @@ public class LevelEditor : MonoBehaviour
             currentTile = tileA;
             Debug.Log("switching to tile A");
         }
+    }
+
+    /// <summary>
+    /// Checks if the tile we are selecting is placable at the current location
+    /// </summary>
+    /// <param name="pos">The tile position relative to your position</param>
+    private bool IsTilePlaceable(Vector3Int pos)
+    {
+        TileData groundTile = TileSpecificInfo.Instance.GetTileDataDictionaryValue(pos);
+        CustomTile selectedTile = GetCurrentCustomTile();
+
+        //if there is NO tile at location
+        if(groundTile == null)
+        {
+            Debug.Log("floor tile does not exist on floor at cursor location : " + pos);
+        }
+
+        switch (selectedTile.tileType)
+        {
+            case TILE_CATEGORIES.SOIL:
+
+                //if there already is a tile in this position
+                if(groundTile != null)
+                {
+                    return false;
+                }
+
+                break;
+
+            case TILE_CATEGORIES.SEED:
+
+                //check if ground tile is empty
+                if (groundTile == null)
+                {
+                    Debug.Log("NO PLACEMENT - no tile exists on floor at cursor location" + pos);
+                    return false;
+                }
+
+                //checks if ground can have a seed planted on it
+                if (!groundTile.canSeed)
+                {
+                    Debug.Log("NO PLACEMENT - floor tile cannot seed");
+                    return false;
+                }
+
+                //soil must be matching current ground
+                if (selectedTile.soilType != groundTile.soilType)
+                {
+                    Debug.Log("NO PLACEMENT - soil type does not match");
+                    return false; 
+                }
+
+                break;
+
+            case TILE_CATEGORIES.FURNITURE:
+
+
+                break;
+
+            case TILE_CATEGORIES.FLOOR:
+
+
+                break;
+
+        }
+
+
+        return true;
     }
 }

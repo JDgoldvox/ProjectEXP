@@ -6,7 +6,7 @@ using UnityEngine.Tilemaps;
 
 public enum SOIL_TYPE { EMPTY, TEMPERATE, JUNGLE, DESERT, SWAMP, ARTIC, MOUNTAINOUS };
 
-public class TileData : MonoBehaviour 
+public class TileData
 {
     public TILE_CATEGORIES tileType;
     public bool canSeed = true;
@@ -36,6 +36,7 @@ public class TileSpecificInfo : MonoBehaviour
     {
         BoundsInt bounds = soilTilemap.cellBounds;
         LevelData levelData = new LevelData();
+        Debug.Log("Ground tilemap bounds " + bounds);
 
         //loop through the entire tilemap
         for (int x = bounds.min.x; x < bounds.max.x; x++)
@@ -43,6 +44,8 @@ public class TileSpecificInfo : MonoBehaviour
             for (int y = bounds.min.y; y < bounds.max.y; y++)
             {
                 Vector3Int tilePos = new Vector3Int(x, y, 0);
+
+                //if there is a tile here and not inside the tile data dic, create one
                 if (!tileData.TryGetValue(tilePos, out TileData value))
                 {
                     CreateTileData(tilePos);
@@ -59,7 +62,19 @@ public class TileSpecificInfo : MonoBehaviour
     {
         //track current position inside the tilemap
         TileBase currentTile = soilTilemap.GetTile(tilePos);
+
+        if(currentTile == null)
+        {
+            return;
+        }
+
         CustomTile currentCustomTile = LevelManager.Instance.tileIDs.Find(t => t.tile == currentTile);
+
+        if(currentCustomTile == null)
+        {
+            Debug.Log("current custom tile is null");
+            return;
+        }
 
         //create new script & add the data into new script
         TileData specificTileData = new TileData();
@@ -80,10 +95,29 @@ public class TileSpecificInfo : MonoBehaviour
     /// <summary>
     /// replaces value with key pos with value tile
     /// </summary>
-    /// <param name="pos">the key to search for in the dictionary</param>
-    /// <param name="tile">the value to be replaced with</param>
-    public void UpdateTilemapDictionary(Vector3Int pos, TileData tile)
+    public void AddToTilemapDictionary(Vector3Int pos, TileData tileInfo)
     {
-        tileData[pos] = tile;
+        //temp, do not add to dic if already something at this location //vs Add
+        if (tileData.TryAdd(pos, tileInfo))
+        {
+            Debug.Log("Added " + pos + " to dictionary");
+        }
+        else
+        {
+            Debug.Log("Tile exists " + pos);
+        }
+        
+    }
+                      
+    public TileData GetTileDataDictionaryValue(Vector3Int key)
+    {
+        if(tileData.TryGetValue(key, out TileData value))
+        {
+            return value;
+        }
+        else
+        {
+            return null;
+        }
     }
 }

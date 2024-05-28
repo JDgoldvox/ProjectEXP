@@ -183,7 +183,7 @@ public class PlayerInput : MonoBehaviour
 
     private void AnimationStuff()
     {
-        Debug.Log(lastDirection);
+        //Debug.Log(lastDirection);
         animator.SetFloat("lastXInput", lastDirection.x);
         animator.SetFloat("lastYInput", lastDirection.y);
 

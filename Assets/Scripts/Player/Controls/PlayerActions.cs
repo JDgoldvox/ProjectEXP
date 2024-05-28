@@ -47,10 +47,6 @@ public class PlayerActions : MonoBehaviour
     {
         if (S_PlayerInput.leftClickInput)
         {
-            //create a new function within level editor
-            //that checks if tile exists in specific tile data (TileSpecificInfo)
-            //if this tile we are about to plant is plantable, allow us to plant
-
             LevelEditor.Instance.PlaceTile();
         }
 
