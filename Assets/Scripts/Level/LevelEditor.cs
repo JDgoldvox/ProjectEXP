@@ -115,7 +115,7 @@ public class LevelEditor : MonoBehaviour
         //if there is NO tile at location
         if(groundTile == null)
         {
-            Debug.Log("floor tile does not exist on floor at cursor location : " + pos);
+            //Debug.Log("floor tile does not exist on floor at cursor location : " + pos);
         }
 
         switch (selectedTile.tileType)
@@ -135,21 +135,21 @@ public class LevelEditor : MonoBehaviour
                 //check if ground tile is empty
                 if (groundTile == null)
                 {
-                    Debug.Log("NO PLACEMENT - no tile exists on floor at cursor location" + pos);
+                    //Debug.Log("NO PLACEMENT - no tile exists on floor at cursor location" + pos);
                     return false;
                 }
 
                 //checks if ground can have a seed planted on it
                 if (!groundTile.canSeed)
                 {
-                    Debug.Log("NO PLACEMENT - floor tile cannot seed");
+                    //Debug.Log("NO PLACEMENT - floor tile cannot seed");
                     return false;
                 }
 
                 //soil must be matching current ground
                 if (selectedTile.soilType != groundTile.soilType)
                 {
-                    Debug.Log("NO PLACEMENT - soil type does not match");
+                    //Debug.Log("NO PLACEMENT - soil type does not match");
                     return false; 
                 }
 

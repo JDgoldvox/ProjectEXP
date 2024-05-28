@@ -79,7 +79,7 @@ public class TileSpecificInfo : MonoBehaviour
 
         if(currentCustomTile == null)
         {
-            Debug.Log("current custom tile is null");
+            //Debug.Log("current custom tile is null");
             return;
         }
 
@@ -107,13 +107,12 @@ public class TileSpecificInfo : MonoBehaviour
         //temp, do not add to dic if already something at this location //vs Add
         if (tileData.TryAdd(pos, tileInfo))
         {
-            Debug.Log("Added " + pos + " to dictionary");
+            //Debug.Log("Added " + pos + " to dictionary");
         }
         else
         {
-            Debug.Log("Tile exists " + pos);
+            //Debug.Log("Tile exists " + pos);
         }
-        
     }
                       
     public TileData GetTileDataDictionaryValue(Vector3Int key)
