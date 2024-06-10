@@ -86,12 +86,15 @@ public class LevelManager : MonoBehaviour
         tilemap.ClearAllTiles();
 
         //setting all tiles
-        for(int i = 0; i < data.tiles.Count; i++)
+        for (int i = 0; i < data.tiles.Count; i++)
         {
             //name is the scriptable object name we've given
             CustomTile customTile = tileIDs.Find(t => t.name == data.tiles[i]);
             tilemap.SetTile(new Vector3Int(data.posX[i], data.posY[i], 0), customTile.tile);
         }
+
+        //remake dictionary
+        TileSpecificInfo.Instance.GenerateTileMapDictionary();
     }
 }
 

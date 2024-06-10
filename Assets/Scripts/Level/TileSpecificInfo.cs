@@ -19,7 +19,8 @@ public class TileSpecificInfo : MonoBehaviour
 {
     public static TileSpecificInfo Instance;
 
-    Dictionary<Vector3Int, TileData> tileData = new Dictionary<Vector3Int, TileData>();
+    
+    [HideInInspector] public Dictionary<Vector3Int, TileData> tileData = new Dictionary<Vector3Int, TileData>();
     [SerializeField] private Tilemap soilTilemap;
 
     private void Awake()
@@ -36,29 +37,7 @@ public class TileSpecificInfo : MonoBehaviour
 
     private void Start()
     {
-        BoundsInt bounds = soilTilemap.cellBounds;
-        LevelData levelData = new LevelData();
-
-        //loop through the entire tilemap
-        for (int x = bounds.min.x; x < bounds.max.x; x++)
-        {
-            for (int y = bounds.min.y; y < bounds.max.y; y++)
-            {
-                Vector3Int tilePos = new Vector3Int(x, y, 0);
-
-                //if there is a tile here and not inside the tile data dic, create one
-                if (!tileData.TryGetValue(tilePos, out TileData value))
-                {
-                    CreateTileData(tilePos);
-                }
-            }
-        }
-
-        foreach (TileData data in tileData.Values)
-        {
-            Debug.Log(data.id);
-        }
-
+        GenerateTileMapDictionary();
     }
 
     /// <summary>
@@ -124,6 +103,28 @@ public class TileSpecificInfo : MonoBehaviour
         else
         {
             return null;
+        }
+    }
+
+   public void GenerateTileMapDictionary()
+    {
+        tileData.Clear();
+        BoundsInt bounds = soilTilemap.cellBounds;
+        LevelData levelData = new LevelData();
+
+        //loop through the entire tilemap
+        for (int x = bounds.min.x; x < bounds.max.x; x++)
+        {
+            for (int y = bounds.min.y; y < bounds.max.y; y++)
+            {
+                Vector3Int tilePos = new Vector3Int(x, y, 0);
+
+                //if there is a tile here and not inside the tile data dic, create one
+                if (!tileData.TryGetValue(tilePos, out TileData value))
+                {
+                    CreateTileData(tilePos);
+                }
+            }
         }
     }
 }

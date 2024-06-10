@@ -37,6 +37,7 @@ SpriteAtlas:
     isAtlasV2: 0
     cachedData: {fileID: 0}
     packedSpriteRenderDataKeys:
+    - 0e75232594495c14586c6dc53358e771: 21300000
     - 45c88e48d1d23e545a5c317cffc449b2: -2133227697
     - 45c88e48d1d23e545a5c317cffc449b2: 1652427502
     - 45c88e48d1d23e545a5c317cffc449b2: -1665275475
@@ -62,6 +63,7 @@ SpriteAtlas:
     - 09d41a4ddbe058046af942f11063a5ae: -636289658
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
+  - {fileID: 21300000, guid: 0e75232594495c14586c6dc53358e771, type: 3}
   - {fileID: -2133227697, guid: 45c88e48d1d23e545a5c317cffc449b2, type: 3}
   - {fileID: 1652427502, guid: 45c88e48d1d23e545a5c317cffc449b2, type: 3}
   - {fileID: -1665275475, guid: 45c88e48d1d23e545a5c317cffc449b2, type: 3}
@@ -86,6 +88,7 @@ SpriteAtlas:
   - {fileID: -1596240085, guid: 09d41a4ddbe058046af942f11063a5ae, type: 3}
   - {fileID: -636289658, guid: 09d41a4ddbe058046af942f11063a5ae, type: 3}
   m_PackedSpriteNamesToIndex:
+  - plants
   - Hub_10
   - Hub_11
   - Hub_12
