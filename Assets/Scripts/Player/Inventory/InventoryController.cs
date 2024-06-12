@@ -9,7 +9,20 @@ public class InventoryController : MonoBehaviour
     public List<InventoryBackgroundItemSlot> itemSlots = new List<InventoryBackgroundItemSlot>();
     public GameObject inventoryItemPrefab;
 
-    public void AddItem(InventoryItemData item)
+    public InventoryItem debugItem;
+
+    private void Start()
+    {
+        AddItem(debugItem);
+        AddItem(debugItem);
+        AddItem(debugItem);
+        AddItem(debugItem);
+        AddItem(debugItem);
+        AddItem(debugItem);
+        AddItem(debugItem);
+        AddItem(debugItem);
+    }
+    public void AddItem(InventoryItem item)
     {
         int index = ReturnEmptySlotIndex();
 
@@ -24,7 +37,7 @@ public class InventoryController : MonoBehaviour
     // qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq
     // qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq
     // qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq
-    void SpawnNewItem(InventoryItemData item, InventoryBackgroundItemSlot slot)
+    void SpawnNewItem(InventoryItem item, InventoryBackgroundItemSlot slot)
     {
         GameObject newItemGo = Instantiate(inventoryItemPrefab, slot.transform);
         ItemSlot itemSlot = newItemGo.GetComponent<ItemSlot>();

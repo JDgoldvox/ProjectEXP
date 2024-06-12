@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-[CreateAssetMenu(menuName = "Inventory/ItemData")]
-public class InventoryItemData : ScriptableObject
+[CreateAssetMenu(menuName = "Inventory/InventoryItem")]
+public class InventoryItem : ScriptableObject
 {
+    public string ID;
+
     [Header("Type of Item")]
-    public CustomTile ItemData;
+    public ItemData ItemData;
     public CustomTile TileData;
 
     [Header("Only Gameplay")]

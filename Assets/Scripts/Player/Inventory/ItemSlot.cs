@@ -6,14 +6,17 @@ using UnityEngine.UI;
 
 public class ItemSlot: MonoBehaviour, IDragHandler, IEndDragHandler, IBeginDragHandler
 {
-    public InventoryItemData itemData;
-
-    [Header("UI")]
-    public Image image;
+    public InventoryItem itemData;
+    private Image image;
 
     [HideInInspector] public Transform parentAfterDrag;
 
-    public void InitializeItem(InventoryItemData newItem)
+    private void Awake()
+    {
+        image = GetComponent<Image>(); 
+    }
+
+    public void InitializeItem(InventoryItem newItem)
     {
         itemData = newItem;
         image.sprite = newItem.sprite;
