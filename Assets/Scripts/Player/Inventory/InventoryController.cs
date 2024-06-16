@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class InventoryController : MonoBehaviour
 {
-    public List<InventoryBackgroundItemSlot> itemSlots = new List<InventoryBackgroundItemSlot>();
+    public List<ItemSlotBackground> itemSlots = new List<ItemSlotBackground>();
     public GameObject inventoryItemPrefab;
 
     public InventoryItem debugItem;
@@ -37,7 +37,7 @@ public class InventoryController : MonoBehaviour
     // qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq
     // qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq
     // qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq
-    void SpawnNewItem(InventoryItem item, InventoryBackgroundItemSlot slot)
+    void SpawnNewItem(InventoryItem item, ItemSlotBackground slot)
     {
         GameObject newItemGo = Instantiate(inventoryItemPrefab, slot.transform);
         ItemSlot itemSlot = newItemGo.GetComponent<ItemSlot>();

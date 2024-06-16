@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class InventoryBackgroundItemSlot : MonoBehaviour, IDropHandler
+public class ItemSlotBackground : MonoBehaviour, IDropHandler
 {
     public void OnDrop(PointerEventData eventData)
     {
