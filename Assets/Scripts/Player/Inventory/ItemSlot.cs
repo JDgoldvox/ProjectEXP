@@ -1,47 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
-public class ItemSlot: MonoBehaviour, IDragHandler, IEndDragHandler, IBeginDragHandler
+public class ItemSlot : MonoBehaviour, IDropHandler
 {
-    public InventoryItem itemData;
-    private Image image;
-
-    [HideInInspector] public Transform parentAfterDrag;
-
+    Image itemImage;
     private void Awake()
     {
-        image = GetComponent<Image>(); 
+        itemImage = GetComponent<Image>();
     }
-
-    public void InitializeItem(InventoryItem newItem)
+    public void OnDrop(PointerEventData eventData)
     {
-        itemData = newItem;
-        image.sprite = newItem.sprite;
-    }
-
-    public void OnBeginDrag(PointerEventData eventData)
-    {
-        Debug.Log("begin drag");
-        image.raycastTarget = false;
-        parentAfterDrag = transform.parent;
-        transform.SetParent(transform.root);
-
-    }
-
-    public void OnDrag(PointerEventData eventData)
-    {
-        Debug.Log("dragging");
-        transform.position = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
-    }
-
-    public void OnEndDrag(PointerEventData eventData)
-    {
-        Debug.Log("end drag");
-        image.raycastTarget = true;
-        transform.SetParent(parentAfterDrag);
+        GameObject obj = eventData.pointerDrag.gameObject;
+        obj.transform.SetParent(transform);
+        obj.transform.position = itemImage.transform.position;
     }
 }

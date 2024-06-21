@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2205288869904723408}
   - component: {fileID: 7280939760348816981}
   - component: {fileID: 458781774502490913}
-  - component: {fileID: 5244321027985527080}
+  - component: {fileID: 8294799668119542207}
   m_Layer: 5
   m_Name: Item Slot background
   m_TagString: Untagged
@@ -66,7 +66,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: -749217711, guid: 3817aa4a33a370741828e3cc93772f85, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -76,7 +76,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &5244321027985527080
+--- !u!114 &8294799668119542207
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -85,6 +85,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 3966234616204304783}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f7f1a8746a99c74a877d09b8da71838, type: 3}
+  m_Script: {fileID: 11500000, guid: efe1eceace66e86408a6bbb479f4b437, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
