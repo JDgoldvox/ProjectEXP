@@ -214,6 +214,34 @@ public partial class @GameInputActionAsset: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""UI"",
+            ""id"": ""edd5d06e-4005-4d71-b91e-1970a8a27b3b"",
+            ""actions"": [
+                {
+                    ""name"": ""OpenAndCloseInventory"",
+                    ""type"": ""Button"",
+                    ""id"": ""623cb859-bc06-48ea-8a05-ea6c7ca87d72"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""eeca3e45-2cdb-4246-ac9d-e6ea1d369641"",
+                    ""path"": ""<Keyboard>/i"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""OpenAndCloseInventory"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -227,6 +255,9 @@ public partial class @GameInputActionAsset: IInputActionCollection2, IDisposable
         m_Player_RightClick = m_Player.FindAction("RightClick", throwIfNotFound: true);
         m_Player_Save = m_Player.FindAction("Save", throwIfNotFound: true);
         m_Player_Load = m_Player.FindAction("Load", throwIfNotFound: true);
+        // UI
+        m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
+        m_UI_OpenAndCloseInventory = m_UI.FindAction("OpenAndCloseInventory", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -378,6 +409,52 @@ public partial class @GameInputActionAsset: IInputActionCollection2, IDisposable
         }
     }
     public PlayerActions @Player => new PlayerActions(this);
+
+    // UI
+    private readonly InputActionMap m_UI;
+    private List<IUIActions> m_UIActionsCallbackInterfaces = new List<IUIActions>();
+    private readonly InputAction m_UI_OpenAndCloseInventory;
+    public struct UIActions
+    {
+        private @GameInputActionAsset m_Wrapper;
+        public UIActions(@GameInputActionAsset wrapper) { m_Wrapper = wrapper; }
+        public InputAction @OpenAndCloseInventory => m_Wrapper.m_UI_OpenAndCloseInventory;
+        public InputActionMap Get() { return m_Wrapper.m_UI; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(UIActions set) { return set.Get(); }
+        public void AddCallbacks(IUIActions instance)
+        {
+            if (instance == null || m_Wrapper.m_UIActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_UIActionsCallbackInterfaces.Add(instance);
+            @OpenAndCloseInventory.started += instance.OnOpenAndCloseInventory;
+            @OpenAndCloseInventory.performed += instance.OnOpenAndCloseInventory;
+            @OpenAndCloseInventory.canceled += instance.OnOpenAndCloseInventory;
+        }
+
+        private void UnregisterCallbacks(IUIActions instance)
+        {
+            @OpenAndCloseInventory.started -= instance.OnOpenAndCloseInventory;
+            @OpenAndCloseInventory.performed -= instance.OnOpenAndCloseInventory;
+            @OpenAndCloseInventory.canceled -= instance.OnOpenAndCloseInventory;
+        }
+
+        public void RemoveCallbacks(IUIActions instance)
+        {
+            if (m_Wrapper.m_UIActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IUIActions instance)
+        {
+            foreach (var item in m_Wrapper.m_UIActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_UIActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public UIActions @UI => new UIActions(this);
     public interface IPlayerActions
     {
         void OnFire(InputAction.CallbackContext context);
@@ -387,5 +464,9 @@ public partial class @GameInputActionAsset: IInputActionCollection2, IDisposable
         void OnRightClick(InputAction.CallbackContext context);
         void OnSave(InputAction.CallbackContext context);
         void OnLoad(InputAction.CallbackContext context);
+    }
+    public interface IUIActions
+    {
+        void OnOpenAndCloseInventory(InputAction.CallbackContext context);
     }
 }

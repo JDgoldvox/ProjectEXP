@@ -1,8 +1,6 @@
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.XInput;
-using static System.Collections.Specialized.BitVector32;
+using System;
 
 public class PlayerInput : MonoBehaviour
 {
@@ -21,6 +19,7 @@ public class PlayerInput : MonoBehaviour
     [field: SerializeField] public bool saveInput { get; private set; }
     [field: SerializeField] public bool loadInput { get; private set; }
 
+    [field: SerializeField] public bool isInventoryClosed { get; private set; }
 
     private InputAction fireAction;
     private InputAction moveAction;
@@ -29,6 +28,10 @@ public class PlayerInput : MonoBehaviour
     private InputAction rightClickAction;
     private InputAction saveAction;
     private InputAction loadAction;
+
+    //inventory
+    private InputAction inventoryOpenAndClose;
+    public static Action<bool> onOpenAndCloseInventory;
 
     [field: SerializeField] public Vector3 lastMouseScreenPosition { get; private set; } = new Vector3();
     [field: SerializeField] public Vector3 lastMouseWorldPosition { get; private set; } = new Vector3();
@@ -59,6 +62,8 @@ public class PlayerInput : MonoBehaviour
         saveAction = myInputActionAsset.Player.Save;
         loadAction = myInputActionAsset.Player.Load;
 
+        inventoryOpenAndClose = myInputActionAsset.UI.OpenAndCloseInventory;
+
         RegisterInputActions();
     }
 
@@ -71,6 +76,7 @@ public class PlayerInput : MonoBehaviour
         rightClickAction.Enable();
         saveAction.Enable();
         loadAction.Enable();
+        inventoryOpenAndClose.Enable();
     }
 
     private void OnDisable()
@@ -82,6 +88,7 @@ public class PlayerInput : MonoBehaviour
         rightClickAction.Disable();
         saveAction.Disable();
         loadAction.Disable();
+        inventoryOpenAndClose.Disable();
     }
 
     void Update()
@@ -145,7 +152,12 @@ public class PlayerInput : MonoBehaviour
         {
             Debug.Log("Load action button pressed");
         }
-
+        
+        if (inventoryOpenAndClose.WasPerformedThisFrame())
+        {
+            isInventoryClosed = !isInventoryClosed;
+            onOpenAndCloseInventory?.Invoke(isInventoryClosed);
+        }
     }
 
     /// <summary>
@@ -192,4 +204,5 @@ public class PlayerInput : MonoBehaviour
         animator.SetFloat("yInput", moveInput.y);
 
     }
+
 }

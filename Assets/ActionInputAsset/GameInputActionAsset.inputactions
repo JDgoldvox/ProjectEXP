@@ -192,6 +192,34 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "UI",
+            "id": "edd5d06e-4005-4d71-b91e-1970a8a27b3b",
+            "actions": [
+                {
+                    "name": "OpenAndCloseInventory",
+                    "type": "Button",
+                    "id": "623cb859-bc06-48ea-8a05-ea6c7ca87d72",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "eeca3e45-2cdb-4246-ac9d-e6ea1d369641",
+                    "path": "<Keyboard>/i",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "OpenAndCloseInventory",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []

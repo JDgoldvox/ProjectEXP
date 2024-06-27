@@ -474,6 +474,27 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: Menus_18
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 48
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7a99a25309f8ddf4790d13b5a629b9c2
+      internalID: 991437170
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -495,6 +516,7 @@ TextureImporter:
       Menus_15: 1263288373
       Menus_16: -749217711
       Menus_17: -48464047
+      Menus_18: 991437170
       Menus_2: -610935068
       Menus_3: 1597175657
       Menus_4: 1021164411
