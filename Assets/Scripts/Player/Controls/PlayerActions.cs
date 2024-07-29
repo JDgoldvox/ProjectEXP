@@ -1,11 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEditor.PlayerSettings;
 
 public class PlayerActions : MonoBehaviour
 {
-    PlayerInput S_PlayerInput;
+    PlayerGeneralInput S_PlayerInput;
     Rigidbody2D rb;
 
     private float walkSpeed = 1f;
@@ -18,7 +17,7 @@ public class PlayerActions : MonoBehaviour
 
     private void Start()
     {
-        S_PlayerInput = PlayerInput.Instance;
+        S_PlayerInput = PlayerGeneralInput.Instance;
     }
 
     private void Update()

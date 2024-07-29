@@ -74,7 +74,7 @@ public class TileSpecificInfo : MonoBehaviour
     /// <returns>returns the TileData key from the dictionary based on position</returns>
     public TileData GetCurrentTileData()
     {
-        Vector3Int currPos = soilTilemap.WorldToCell(PlayerInput.Instance.lastMouseWorldPosition);
+        Vector3Int currPos = soilTilemap.WorldToCell(PlayerGeneralInput.Instance.lastMouseWorldPosition);
         return tileData[currPos];
     }
 

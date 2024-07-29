@@ -9,12 +9,12 @@ public class UIEvents : MonoBehaviour
 
     private void OnEnable()
     {
-        PlayerInput.onOpenAndCloseInventory += OpenAndCloseInventory;
+        PlayerGeneralInput.onOpenAndCloseInventory += OpenAndCloseInventory;
     }
 
     private void OnDisable()
     {
-        PlayerInput.onOpenAndCloseInventory -= OpenAndCloseInventory;
+        PlayerGeneralInput.onOpenAndCloseInventory -= OpenAndCloseInventory;
     }
 
     private void OpenAndCloseInventory(bool isClosed)

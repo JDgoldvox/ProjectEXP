@@ -20,11 +20,11 @@ public class LevelEditor : MonoBehaviour
 
     [SerializeField] Camera mainCamera;
 
-    PlayerInput S_PlayerInput;
+    PlayerGeneralInput S_PlayerGeneralInput;
 
     private void Awake()
     {
-        S_PlayerInput = GetComponent<PlayerInput>();
+        S_PlayerGeneralInput = GetComponent<PlayerGeneralInput>();
 
         if (Instance == null)
         {
@@ -54,7 +54,7 @@ public class LevelEditor : MonoBehaviour
     /// </summary>
     public void PlaceTile()
     {
-        Vector3Int pos = currentTileMap.WorldToCell(S_PlayerInput.lastMouseWorldPosition);
+        Vector3Int pos = currentTileMap.WorldToCell(S_PlayerGeneralInput.lastMouseWorldPosition);
         //early exit 
         if (!IsTilePlaceable(pos))
         {
@@ -79,7 +79,7 @@ public class LevelEditor : MonoBehaviour
     /// </summary>
     public void DeleteTile()
     {
-        Vector3Int pos = currentTileMap.WorldToCell(S_PlayerInput.lastMouseWorldPosition);
+        Vector3Int pos = currentTileMap.WorldToCell(S_PlayerGeneralInput.lastMouseWorldPosition);
 
         currentTileMap.SetTile(pos, null);
     }

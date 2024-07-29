@@ -1,5 +1,5 @@
 {
-    "name": "GameInputActionAsset",
+    "name": "PlayerInputActionAsset",
     "maps": [
         {
             "name": "Player",

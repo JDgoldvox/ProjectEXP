@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 using System.Linq;
 using System.IO;
+using System;
 
 // BUGS: IDS MUST EXIST FOR ALL TILES OR ELSE IT WILL NOT WORK
 
@@ -20,6 +21,10 @@ public class LevelManager : MonoBehaviour
     private const string LEVEL_DATA_FILE_PATH = "/Level/Custom/";
     private const string HUB_LEVEL_FILE_NAME = "hub.json";
 
+    //event setup
+    public static Action E_SaveLevel;
+    public static Action E_LoadLevel;
+
     private void Awake()
     {
         if(Instance == null)
@@ -30,15 +35,19 @@ public class LevelManager : MonoBehaviour
         {
             Destroy(this);
         }
+
+        E_SaveLevel += SaveLevel;
+        E_LoadLevel += LoadLevel;
+
     }
     private void Update()
     {
-        if (PlayerInput.Instance.saveInput)
+        if (PlayerGeneralInput.Instance.saveInput)
         {
             SaveLevel();
         }
 
-        if (PlayerInput.Instance.loadInput)
+        if (PlayerGeneralInput.Instance.loadInput)
         {
             LoadLevel();
         }

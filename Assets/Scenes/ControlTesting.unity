@@ -2215,6 +2215,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb933b0a8f8c89a428a023c78fc08fd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inputActionAsset: {fileID: -944628639613478452, guid: 6df4c67d0d70c4c47a1cb95f478d4862, type: 3}
+  fire: Fire
+  move: Move
+  run: Run
+  leftClick: LeftClick
+  rightClick: RightClick
+  save: Save
+  load: Load
+  inventoryOpenAndClose: inventoryOpenAndClose
   <moveInput>k__BackingField: {x: 0, y: 0}
   <fireInput>k__BackingField: 0
   <runInput>k__BackingField: 0
@@ -2222,9 +2231,9 @@ MonoBehaviour:
   <rightClickInput>k__BackingField: 0
   <saveInput>k__BackingField: 0
   <loadInput>k__BackingField: 0
-  <isInventoryClosed>k__BackingField: 0
   <lastMouseScreenPosition>k__BackingField: {x: 0, y: 0, z: 0}
   <lastMouseWorldPosition>k__BackingField: {x: 0, y: 0, z: 0}
+  <isInventoryClosed>k__BackingField: 0
 --- !u!4 &1324428277
 Transform:
   m_ObjectHideFlags: 0
