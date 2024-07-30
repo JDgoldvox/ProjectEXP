@@ -22,7 +22,7 @@ public class PlayerActions : MonoBehaviour
 
     private void Update()
     {
-        Plant();
+        //Plant();
     }
 
     void FixedUpdate()

@@ -92,9 +92,8 @@ public class PlayerGeneralInput : MonoBehaviour
         //fire
         fireAction.performed += FireFunction;
 
-
         //move
-        moveAction.canceled += context => moveInput = Vector2.zero;
+        //moveAction.canceled += context => moveInput = Vector2.zero;
 
         //moveAction.canceled += context => animator.SetFloat("xInput", 0f);
         //moveAction.canceled += context => animator.SetFloat("yInput", 0f);
@@ -111,9 +110,7 @@ public class PlayerGeneralInput : MonoBehaviour
 
         //clicks
         leftClickAction.performed += LeftClickFunction;
-        leftClickAction.canceled += LeftClickFunction;
         rightClickAction.performed += RightClickFunction;
-        rightClickAction.canceled += RightClickFunction;
 
         //inventory
         openAndCloseInventoryAction.performed += InventoryOpenAndCloseFunction;
@@ -164,21 +161,19 @@ public class PlayerGeneralInput : MonoBehaviour
 
     private void LeftClickFunction(InputAction.CallbackContext context)
     {
-        leftClickInput = leftClickAction.WasPerformedThisFrame();
-
         if (context.performed)
         {
             CalculateScreenAndWorldMousePosition();
+            LevelEditor.Instance.PlaceTile();
         }
+        
     }
 
     private void RightClickFunction(InputAction.CallbackContext context)
     {
-        rightClickInput = rightClickAction.WasPerformedThisFrame();
-
         if (context.performed)
         {
-            CalculateScreenAndWorldMousePosition();
+            LevelEditor.Instance.SwitchTiles();
         }
     }
 

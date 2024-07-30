@@ -58,7 +58,6 @@ public class LevelEditor : MonoBehaviour
         //early exit 
         if (!IsTilePlaceable(pos))
         {
-
             return;
         }
 
