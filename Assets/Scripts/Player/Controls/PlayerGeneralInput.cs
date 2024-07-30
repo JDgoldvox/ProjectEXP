@@ -16,7 +16,7 @@ public class PlayerGeneralInput : MonoBehaviour
     private string playerMap = "Player";
     private string uiMap = "UI";
 
-    [Header("Action Name References")]
+    [Header("Input Actions")]
     private InputAction fireAction;
     private InputAction moveAction;
     private InputAction runAction;
@@ -34,15 +34,7 @@ public class PlayerGeneralInput : MonoBehaviour
     private string rightClick = "RightClick";
     private string save = "Save";
     private string load = "Load";
-    private string openAndCloseInventory = "OpenAndCloseInventory";
-
-    //inventory
-    private InputAction inventoryOpenAndCloseInput;
-
-    // // // // //
-    public static Action<bool> onOpenAndCloseInventory;
-    // // // // //
-
+    
     //variables
     [field: SerializeField] public Vector2 moveInput { get; private set; }
     [field: SerializeField] public bool fireInput { get; private set; }
@@ -55,7 +47,6 @@ public class PlayerGeneralInput : MonoBehaviour
     [field: SerializeField] public Vector3 lastMouseScreenPosition { get; private set; } = new Vector3();
     [field: SerializeField] public Vector3 lastMouseWorldPosition { get; private set; } = new Vector3();
 
-    [field: SerializeField] public bool isInventoryClosed { get; private set; }
 
     //logic ???
     private Vector2 lastDirection = new Vector2();
@@ -82,7 +73,6 @@ public class PlayerGeneralInput : MonoBehaviour
         rightClickAction = inputActionAsset.FindActionMap(playerMap).FindAction(rightClick);
         saveAction = inputActionAsset.FindActionMap(playerMap).FindAction(save);
         loadAction = inputActionAsset.FindActionMap(playerMap).FindAction(load);
-        openAndCloseInventoryAction = inputActionAsset.FindActionMap(uiMap).FindAction(openAndCloseInventory);
 
         RegisterInputActions();
     }
@@ -93,15 +83,15 @@ public class PlayerGeneralInput : MonoBehaviour
         fireAction.performed += FireFunction;
 
         //move
-        //moveAction.canceled += context => moveInput = Vector2.zero;
+        moveAction.canceled += context => moveInput = Vector2.zero;
 
-        //moveAction.canceled += context => animator.SetFloat("xInput", 0f);
-        //moveAction.canceled += context => animator.SetFloat("yInput", 0f);
+        moveAction.canceled += context => animator.SetFloat("xInput", 0f);
+        moveAction.canceled += context => animator.SetFloat("yInput", 0f);
 
-        //moveAction.performed += context => lastDirection = moveAction.ReadValue<Vector2>();
+        moveAction.performed += context => lastDirection = moveAction.ReadValue<Vector2>();
 
-        //moveAction.performed += context => animator.SetBool("isMoving", true);
-        //moveAction.canceled += context => animator.SetBool("isMoving", false);
+        moveAction.performed += context => animator.SetBool("isMoving", true);
+        moveAction.canceled += context => animator.SetBool("isMoving", false);
 
 
         //run
@@ -111,9 +101,6 @@ public class PlayerGeneralInput : MonoBehaviour
         //clicks
         leftClickAction.performed += LeftClickFunction;
         rightClickAction.performed += RightClickFunction;
-
-        //inventory
-        openAndCloseInventoryAction.performed += InventoryOpenAndCloseFunction;
 
         //save & load
         saveAction.performed += SaveFunction;
@@ -129,7 +116,6 @@ public class PlayerGeneralInput : MonoBehaviour
         rightClickAction.Enable();
         saveAction.Enable();
         loadAction.Enable();
-        openAndCloseInventoryAction.Enable();
     }
 
     private void OnDisable()
@@ -141,7 +127,6 @@ public class PlayerGeneralInput : MonoBehaviour
         rightClickAction.Disable();
         saveAction.Disable();
         loadAction.Disable();
-        openAndCloseInventoryAction.Disable();
     }
 
     void Update()
@@ -192,15 +177,6 @@ public class PlayerGeneralInput : MonoBehaviour
         {
             LevelManager.E_LoadLevel.Invoke();
             Debug.Log("LOADING");
-        }
-    }
-
-    private void InventoryOpenAndCloseFunction(InputAction.CallbackContext context)
-    {
-        if (context.performed)
-        {
-            isInventoryClosed = !isInventoryClosed;
-            onOpenAndCloseInventory?.Invoke(isInventoryClosed);
         }
     }
 

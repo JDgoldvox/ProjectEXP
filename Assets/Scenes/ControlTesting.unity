@@ -2196,6 +2196,7 @@ GameObject:
   - component: {fileID: 1324428282}
   - component: {fileID: 1324428283}
   - component: {fileID: 1324428284}
+  - component: {fileID: 1324428285}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -2216,14 +2217,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inputActionAsset: {fileID: -944628639613478452, guid: 6df4c67d0d70c4c47a1cb95f478d4862, type: 3}
-  fire: Fire
-  move: Move
-  run: Run
-  leftClick: LeftClick
-  rightClick: RightClick
-  save: Save
-  load: Load
-  inventoryOpenAndClose: inventoryOpenAndClose
   <moveInput>k__BackingField: {x: 0, y: 0}
   <fireInput>k__BackingField: 0
   <runInput>k__BackingField: 0
@@ -2444,6 +2437,19 @@ MonoBehaviour:
   idleLeftAnim: {fileID: 7400000, guid: 5bc9de8758156e9408bb5dd59d183448, type: 2}
   idleRightAnim: {fileID: 7400000, guid: ddbda250cba296c44afd9d89b1873412, type: 2}
   idleBackwardsAnim: {fileID: 7400000, guid: 9419cace0cf142c4bb4328d9d2366739, type: 2}
+--- !u!114 &1324428285
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1324428275}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f655da51402ab554487d9b092c7da435, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inputActionAsset: {fileID: -944628639613478452, guid: 6df4c67d0d70c4c47a1cb95f478d4862, type: 3}
 --- !u!1 &1408394409
 GameObject:
   m_ObjectHideFlags: 0

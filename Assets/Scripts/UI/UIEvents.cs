@@ -7,14 +7,11 @@ public class UIEvents : MonoBehaviour
 {
     [SerializeField] private TabSwitch S_TabSwitch;
 
-    private void OnEnable()
-    {
-        PlayerGeneralInput.onOpenAndCloseInventory += OpenAndCloseInventory;
-    }
+    public static Action<bool> E_OpenAndCloseInventory;
 
-    private void OnDisable()
+    private void Awake()
     {
-        PlayerGeneralInput.onOpenAndCloseInventory -= OpenAndCloseInventory;
+        E_OpenAndCloseInventory += OpenAndCloseInventory;
     }
 
     private void OpenAndCloseInventory(bool isClosed)
