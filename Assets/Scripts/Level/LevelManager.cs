@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
-using System.Linq;
 using System.IO;
 using System;
 
@@ -38,21 +37,7 @@ public class LevelManager : MonoBehaviour
 
         E_SaveLevel += SaveLevel;
         E_LoadLevel += LoadLevel;
-
     }
-    private void Update()
-    {
-        if (PlayerGeneralInput.Instance.saveInput)
-        {
-            SaveLevel();
-        }
-
-        if (PlayerGeneralInput.Instance.loadInput)
-        {
-            LoadLevel();
-        }
-    }
-
     private void SaveLevel()
     {
         BoundsInt bounds = tilemap.cellBounds;

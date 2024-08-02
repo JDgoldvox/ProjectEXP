@@ -18,7 +18,6 @@ public class TileData
 public class TileSpecificInfo : MonoBehaviour
 {
     public static TileSpecificInfo Instance;
-
     
     [HideInInspector] public Dictionary<Vector3Int, TileData> tileData = new Dictionary<Vector3Int, TileData>();
     [SerializeField] private Tilemap soilTilemap;

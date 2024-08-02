@@ -22,6 +22,6 @@ public class CustomTile : ScriptableObject
     [Tooltip("The type of soil the tile is/the type of soil the seed can be planted in")]
     public SOIL_TYPE soilType;
 
-    [Tooltip("Boolean for the soil/floor to check if the tile can have a seed planted on it")]
+    [Tooltip("the soil/floor to check if the tile can have a seed planted on it")]
     public bool canSeed;
 }

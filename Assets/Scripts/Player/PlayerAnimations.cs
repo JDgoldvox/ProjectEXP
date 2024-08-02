@@ -1,45 +1,35 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerAnimations : MonoBehaviour
 {
     private Animator animator;
     private Rigidbody2D rb;
-    [SerializeField] private AnimationClip walkForwardAnim;
-    [SerializeField] private AnimationClip walkLeftAnim;
-    [SerializeField] private AnimationClip walkRightAnim;
-    [SerializeField] private AnimationClip walkBackwardsAnim;
 
-    [SerializeField] private AnimationClip idleForwardAnim;
-    [SerializeField] private AnimationClip idleLeftAnim;
-    [SerializeField] private AnimationClip idleRightAnim;
-    [SerializeField] private AnimationClip idleBackwardsAnim;
-
-    private const string PLAYER_IDLE_FORWARD = "Player_IdleForward";
-    private const string PLAYER_IDLE_BACKWARDS = "Player_IdleBackwards";
-    private const string PLAYER_IDLE_LEFT = "Player_IdleLeft";
-    private const string PLAYER_IDLE_RIGHT = "Player_IdleRight";
-
-    private string PLAYER_WALK_FORWARD = "Player_IdleForward";
-    private const string PLAYER_WALK_BACKWARDS = "Player_IdleBackwards";
-    private const string PLAYER_WALK_LEFT = "Player_IdleLeft";
-    private const string PLAYER_WALK_RIGHT = "Player_IdleRight";
-
-    private void Start()
-    {
-        //PLAYER_WALK_FORWARD = walkForwardAnim.name;
-        rb = GetComponent<Rigidbody2D>();
-    }
     private void Awake()
     {
         animator = GetComponent<Animator>();
+        rb = GetComponent<Rigidbody2D>();
     }
 
     private void Update()
     {
- 
+        WalkAnimation();
+    }
+
+    private void WalkAnimation()
+    {
+        Vector2 moveInput = PlayerGeneralInput.Instance.moveInput;
+        bool isMoving = PlayerGeneralInput.Instance.isMoving;
+
+        animator.SetBool("isMoving", isMoving);
+
+        // moveInput != Vector2.zero // to save the last input for idle direction
+        if (moveInput != Vector2.zero)
+        {
+            animator.SetFloat("xInput", moveInput.x);
+            animator.SetFloat("yInput", moveInput.y);
+        }
     }
 }

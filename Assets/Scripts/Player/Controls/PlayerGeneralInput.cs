@@ -14,7 +14,6 @@ public class PlayerGeneralInput : MonoBehaviour
 
     [Header("Action Map Name References")]
     private string playerMap = "Player";
-    private string uiMap = "UI";
 
     [Header("Input Actions")]
     private InputAction fireAction;
@@ -44,12 +43,10 @@ public class PlayerGeneralInput : MonoBehaviour
     [field: SerializeField] public bool saveInput { get; private set; }
     [field: SerializeField] public bool loadInput { get; private set; }
 
+    [field: SerializeField] public bool isMoving { get; private set; }
+
     [field: SerializeField] public Vector3 lastMouseScreenPosition { get; private set; } = new Vector3();
     [field: SerializeField] public Vector3 lastMouseWorldPosition { get; private set; } = new Vector3();
-
-
-    //logic ???
-    private Vector2 lastDirection = new Vector2();
 
     private void Awake()
     {
@@ -63,8 +60,7 @@ public class PlayerGeneralInput : MonoBehaviour
             Destroy(this);
         }
 
-        //idk why this is here  now
-        animator = GetComponent<Animator>();
+        isMoving = false;
 
         fireAction = inputActionAsset.FindActionMap(playerMap).FindAction(fire);
         moveAction = inputActionAsset.FindActionMap(playerMap).FindAction(move);
@@ -83,16 +79,8 @@ public class PlayerGeneralInput : MonoBehaviour
         fireAction.performed += FireFunction;
 
         //move
-        moveAction.canceled += context => moveInput = Vector2.zero;
-
-        moveAction.canceled += context => animator.SetFloat("xInput", 0f);
-        moveAction.canceled += context => animator.SetFloat("yInput", 0f);
-
-        moveAction.performed += context => lastDirection = moveAction.ReadValue<Vector2>();
-
-        moveAction.performed += context => animator.SetBool("isMoving", true);
-        moveAction.canceled += context => animator.SetBool("isMoving", false);
-
+        moveAction.performed += MoveFunction;
+        moveAction.canceled += MoveFunction;
 
         //run
         runAction.performed += context => runInput = true;
@@ -131,8 +119,6 @@ public class PlayerGeneralInput : MonoBehaviour
 
     void Update()
     {
-        AnimationStuff();
-
         if (loadInput)
         {
             Debug.Log("Load action button pressed");
@@ -188,20 +174,23 @@ public class PlayerGeneralInput : MonoBehaviour
         }
     }
 
+    private void MoveFunction(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            moveInput = context.ReadValue<Vector2>();
+            isMoving = true;
+        }
+        else if (context.canceled)
+        {
+            moveInput = Vector2.zero;
+            isMoving = false;
+        }
+    }
+
     private void CalculateScreenAndWorldMousePosition()
     {
         lastMouseScreenPosition = Mouse.current.position.ReadValue();
         lastMouseWorldPosition = Camera.main.ScreenToWorldPoint(lastMouseScreenPosition);
-    }
-
-    private void AnimationStuff()
-    {
-        //Debug.Log(lastDirection);
-        animator.SetFloat("lastXInput", lastDirection.x);
-        animator.SetFloat("lastYInput", lastDirection.y);
-
-        moveInput = moveAction.ReadValue<Vector2>();
-        animator.SetFloat("xInput", moveInput.x);
-        animator.SetFloat("yInput", moveInput.y);
     }
 }

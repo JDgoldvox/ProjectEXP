@@ -11,16 +11,13 @@ public class LevelEditor : MonoBehaviour
 {
     public static LevelEditor Instance;
 
+    PlayerGeneralInput S_PlayerGeneralInput;
+
     [SerializeField] Tilemap currentTileMap;
     [SerializeField] public TileBase currentTile;
-
     [SerializeField] private TileBase tileA;
     [SerializeField] private TileBase tileB;
-
-
     [SerializeField] Camera mainCamera;
-
-    PlayerGeneralInput S_PlayerGeneralInput;
 
     private void Awake()
     {
@@ -79,7 +76,6 @@ public class LevelEditor : MonoBehaviour
     public void DeleteTile()
     {
         Vector3Int pos = currentTileMap.WorldToCell(S_PlayerGeneralInput.lastMouseWorldPosition);
-
         currentTileMap.SetTile(pos, null);
     }
 
@@ -105,7 +101,6 @@ public class LevelEditor : MonoBehaviour
     /// <summary>
     /// Checks if the tile we are selecting is placable at the current location
     /// </summary>
-    /// <param name="pos">The tile position relative to your position</param>
     private bool IsTilePlaceable(Vector3Int pos)
     {
         TileData groundTile = TileSpecificInfo.Instance.GetTileDataDictionaryValue(pos);
@@ -126,7 +121,6 @@ public class LevelEditor : MonoBehaviour
                 {
                     return false;
                 }
-
                 break;
 
             case TILE_CATEGORIES.SEED:
@@ -155,17 +149,11 @@ public class LevelEditor : MonoBehaviour
                 break;
 
             case TILE_CATEGORIES.FURNITURE:
-
-
                 break;
 
             case TILE_CATEGORIES.FLOOR:
-
-
                 break;
-
         }
-
 
         return true;
     }
