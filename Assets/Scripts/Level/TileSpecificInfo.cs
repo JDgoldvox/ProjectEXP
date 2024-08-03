@@ -4,8 +4,6 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public enum SOIL_TYPE { EMPTY, TEMPERATE, JUNGLE, DESERT, SWAMP, ARTIC, MOUNTAINOUS };
-
 public class TileData
 {
     public TILE_CATEGORIES tileType;

@@ -33,7 +33,6 @@ public class LevelEditor : MonoBehaviour
         }
     }
 
-
     private void Update()
     {
         //if (S_PlayerInput.leftClickInput)

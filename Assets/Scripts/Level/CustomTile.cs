@@ -3,11 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public enum TILE_CATEGORIES
-{
-    SOIL, SEED, FURNITURE, FLOOR
-}
-
 [CreateAssetMenu(fileName = "New Custom Tile", menuName = "LevelEditor/Tile")]
 public class CustomTile : ScriptableObject
 {
