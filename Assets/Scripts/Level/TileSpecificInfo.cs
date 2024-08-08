@@ -4,15 +4,6 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class TileData
-{
-    public TILE_CATEGORIES tileType;
-    public bool canSeed = true;
-    public SOIL_TYPE soilType = SOIL_TYPE.EMPTY;
-
-    public string id;
-}
-
 public class TileSpecificInfo : MonoBehaviour
 {
     public static TileSpecificInfo Instance;

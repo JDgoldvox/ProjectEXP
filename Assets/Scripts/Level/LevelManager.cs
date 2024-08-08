@@ -38,6 +38,10 @@ public class LevelManager : MonoBehaviour
         E_SaveLevel += SaveLevel;
         E_LoadLevel += LoadLevel;
     }
+
+    /// <summary>
+    /// Loops through tile map, checks to see if we have existing data, if not, 
+    /// </summary>
     private void SaveLevel()
     {
         BoundsInt bounds = tilemap.cellBounds;
@@ -48,18 +52,15 @@ public class LevelManager : MonoBehaviour
         {
             for (int y = bounds.min.y; y < bounds.max.y; y++)
             {
-                //track current position inside the tilemap
+                //Grab current tilebase from position of tile in world\
+                //try find this tile inside our custom tile data
                 TileBase currentTile = tilemap.GetTile(new Vector3Int(x, y, 0));
-
                 CustomTile currentCustomTile = tileIDs.Find(t => t.tile == currentTile);
 
-                //add info to our tile list
+                //add info to our tile list, if no data already exists for this tile
                 if(currentTile != null)
                 {
-                    Debug.Log(currentCustomTile.id);
-                    levelData.tiles.Add(currentCustomTile.id);
-                    levelData.posX.Add(x);
-                    levelData.posY.Add(y);
+                    AddNewCustomTileData(levelData, currentCustomTile, x, y);
                 }
             }
         }
@@ -90,14 +91,12 @@ public class LevelManager : MonoBehaviour
         //remake dictionary
         TileSpecificInfo.Instance.GenerateTileMapDictionary();
     }
-}
 
-public class LevelData
-{
-    //List of the types of tiles stored
-    public List<string> tiles = new List<string>();
-
-    //The position of the tile being stored
-    public List<int> posY = new List<int>();
-    public List<int> posX = new List<int>();
+    private void AddNewCustomTileData(LevelData levelData, CustomTile tile, int x, int y)
+    {
+        Debug.Log(tile.id);
+        levelData.tiles.Add(tile.id);
+        levelData.posX.Add(x);
+        levelData.posY.Add(y);
+    }
 }
