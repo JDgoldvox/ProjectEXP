@@ -2224,9 +2224,9 @@ MonoBehaviour:
   <rightClickInput>k__BackingField: 0
   <saveInput>k__BackingField: 0
   <loadInput>k__BackingField: 0
+  <isMoving>k__BackingField: 0
   <lastMouseScreenPosition>k__BackingField: {x: 0, y: 0, z: 0}
   <lastMouseWorldPosition>k__BackingField: {x: 0, y: 0, z: 0}
-  <isInventoryClosed>k__BackingField: 0
 --- !u!4 &1324428277
 Transform:
   m_ObjectHideFlags: 0
@@ -2429,14 +2429,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9348f37ba5d8a541b38fde6c17f462e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkForwardAnim: {fileID: 7400000, guid: 721881f509291a5459f1ebb6c9bd4863, type: 2}
-  walkLeftAnim: {fileID: 7400000, guid: eff1f4be33bf40640aac9b2c7fcacf6a, type: 2}
-  walkRightAnim: {fileID: 7400000, guid: aa99188181d605842a29f3eb723e8c2d, type: 2}
-  walkBackwardsAnim: {fileID: 7400000, guid: 9b906393e8d6d0546b402e474e300065, type: 2}
-  idleForwardAnim: {fileID: 7400000, guid: 90cb5a8aadba25d44be36ee0d685708f, type: 2}
-  idleLeftAnim: {fileID: 7400000, guid: 5bc9de8758156e9408bb5dd59d183448, type: 2}
-  idleRightAnim: {fileID: 7400000, guid: ddbda250cba296c44afd9d89b1873412, type: 2}
-  idleBackwardsAnim: {fileID: 7400000, guid: 9419cace0cf142c4bb4328d9d2366739, type: 2}
 --- !u!114 &1324428285
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2450,6 +2442,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inputActionAsset: {fileID: -944628639613478452, guid: 6df4c67d0d70c4c47a1cb95f478d4862, type: 3}
+  <isInventoryClosed>k__BackingField: 0
 --- !u!1 &1408394409
 GameObject:
   m_ObjectHideFlags: 0
@@ -2495,11 +2488,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tilemap: {fileID: 1968448816}
-  tileIDs:
-  - {fileID: 11400000, guid: 46bc432619b25f640a687d2a160c5906, type: 2}
-  - {fileID: 11400000, guid: 83aea24930554bb48bf29b835de70141, type: 2}
-  - {fileID: 11400000, guid: a3e21a80233b8ac40b19d0cf24818c15, type: 2}
-  - {fileID: 11400000, guid: b0b765a43fa340c41ac860488f8ca550, type: 2}
+  tileIDs: []
 --- !u!1 &1478715942
 GameObject:
   m_ObjectHideFlags: 0

@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 using System.IO;
 using System;
+using Unity.VisualScripting;
+using System.Linq;
 
 // BUGS: IDS MUST EXIST FOR ALL TILES OR ELSE IT WILL NOT WORK
 
@@ -19,6 +21,10 @@ public class LevelManager : MonoBehaviour
     //current path names
     private const string LEVEL_DATA_FILE_PATH = "/Level/Custom/";
     private const string HUB_LEVEL_FILE_NAME = "hub.json";
+
+    //loading all IDS
+    private const string TILE_ID_FILE_PATH = "/Tiles/";
+    private List<CustomTile> scriptableObjectsList;
 
     //event setup
     public static Action E_SaveLevel;
@@ -37,6 +43,14 @@ public class LevelManager : MonoBehaviour
 
         E_SaveLevel += SaveLevel;
         E_LoadLevel += LoadLevel;
+
+        InitTileIDs();
+    }
+
+    private void InitTileIDs()
+    {
+        //add range elimnates loop, so it can convert an array to a list
+        tileIDs = Resources.LoadAll("Tiles", typeof(CustomTile)).Cast<CustomTile>().ToList();
     }
 
     /// <summary>

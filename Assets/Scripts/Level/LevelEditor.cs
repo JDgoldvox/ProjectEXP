@@ -32,18 +32,6 @@ public class LevelEditor : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
-        //if (S_PlayerInput.leftClickInput)
-        //{
-        //    PlaceTile();
-        //}
-        //if(S_PlayerInput.rightClickInput)
-        //{
-        //    DeleteTile();
-        //}
-    }
-
     /// <summary>
     /// places tile based on current position
     /// </summary>
