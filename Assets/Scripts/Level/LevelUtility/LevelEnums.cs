@@ -8,3 +8,8 @@ public enum TILE_CATEGORIES
 {
     SOIL, SEED, FURNITURE, FLOOR
 }
+
+public enum TILE_PLACEMENT
+{
+    GROUND, FURNITURE
+}

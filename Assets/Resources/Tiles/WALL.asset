@@ -9,12 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0698c779d152f3e4ebb5957c04f8ebfd, type: 3}
-  m_Name: qwe
+  m_Script: {fileID: 11500000, guid: 9e6126e5ff908bd4bb5d5b7f900f487c, type: 3}
+  m_Name: WALL
   m_EditorClassIdentifier: 
-  ItemData: {fileID: 0}
-  TileData: {fileID: 0}
-  itemType: 0
-  actionType: 0
-  stackable: 0
-  sprite: {fileID: 0}
+  tile: {fileID: 11400000, guid: d63e3106e28dd7a46bdcfcd2cd065ebf, type: 2}
+  id: left_wall
+  tilePlacement: 1
+  tileType: 2
+  soilType: 0
+  canSeed: 0

@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tile: {fileID: 11400000, guid: 235f13ed10826c64192e2c95339896e9, type: 2}
   id: SOIL
-  tileType: 0
+  tilePlacement: 0
+  tileType: 1
   soilType: 1
   canSeed: 1

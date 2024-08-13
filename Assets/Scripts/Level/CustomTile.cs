@@ -8,7 +8,9 @@ public class CustomTile : ScriptableObject
 {
     public TileBase tile;
     public string id;
-    //CanPlaceFurniture
+
+    [Tooltip("The type of tile")]
+    public TILE_PLACEMENT tilePlacement;
 
     [Tooltip("The type of tile")]
     public TILE_CATEGORIES tileType;

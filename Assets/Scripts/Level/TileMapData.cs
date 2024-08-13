@@ -2,7 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LevelData
+/// <summary>
+/// This contains all tiles and in this tile map
+/// </summary>
+public class TileMapData
 {
     //List of the types of tiles stored
     public List<string> tiles = new List<string>();

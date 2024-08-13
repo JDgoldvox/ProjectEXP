@@ -12,12 +12,15 @@ public class LevelEditor : MonoBehaviour
 
     PlayerGeneralInput S_PlayerGeneralInput;
 
-    [SerializeField] Tilemap currentTileMap;
     [SerializeField] public TileBase currentTile;
     [SerializeField] private TileBase tileA;
     [SerializeField] private TileBase tileB;
     [SerializeField] Camera mainCamera;
 
+    private void Start()
+    {
+        currentTile = tileA;
+    }
     private void Awake()
     {
         S_PlayerGeneralInput = GetComponent<PlayerGeneralInput>();
@@ -37,23 +40,25 @@ public class LevelEditor : MonoBehaviour
     /// </summary>
     public void PlaceTile()
     {
-        Vector3Int pos = currentTileMap.WorldToCell(S_PlayerGeneralInput.lastMouseWorldPosition);
-        //early exit 
-        if (!IsTilePlaceable(pos))
-        {
-            return;
-        }
+        //find info from current Tile
+        CustomTile customTile = LevelManager.Instance.tileIDs.Find(t => t.tile == currentTile);
 
-        Debug.Log("Tile is placeable...");
+        //check placement on which tilemap
+        Tilemap tileMap = LevelFunctions.TilePlacementToTileMap(customTile.tilePlacement);
 
-        //set this tile to new sprite
-        currentTileMap.SetTile(pos, currentTile);
+        //find position on this tilemap
+        Vector3Int pos = tileMap.WorldToCell(S_PlayerGeneralInput.lastMouseWorldPosition);
+        
+        //check to see if this tile is placable
+        if (!IsTilePlaceable(pos)) { return; }
 
-        //add specific tile data to dictionary
-        TileData specificTileData = new TileData();
-        CustomTile customTile = GetCurrentCustomTile();
-        TransferTileData.MoveData(customTile, ref specificTileData);
-        TileSpecificInfo.Instance.AddToTilemapDictionary(pos, specificTileData);
+        //change tile sprite
+        tileMap.SetTile(pos, currentTile);
+
+        //add tile data to live dictionary
+        TileData tileData = new TileData();
+        TransferTileData.MoveData(customTile, ref tileData);
+        TileInfo.Instance.AddToTilemapDictionary(pos, tileData);
     }
 
     /// <summary>
@@ -61,13 +66,28 @@ public class LevelEditor : MonoBehaviour
     /// </summary>
     public void DeleteTile()
     {
-        Vector3Int pos = currentTileMap.WorldToCell(S_PlayerGeneralInput.lastMouseWorldPosition);
-        currentTileMap.SetTile(pos, null);
-    }
+        //this is kinda fucked
 
-    public CustomTile GetCurrentCustomTile()
-    {
-        return LevelManager.Instance.tileIDs.Find(t => t.tile == currentTile);
+        //delete furniture sprite first then floor
+        Tilemap tileMap = LevelFunctions.TilePlacementToTileMap(TILE_PLACEMENT.FURNITURE);
+
+        Vector3Int pos = tileMap.WorldToCell(S_PlayerGeneralInput.lastMouseWorldPosition);
+
+        if(tileMap.GetTile(pos) != null)
+        {
+            tileMap.SetTile(pos, null);
+            return;
+        }
+
+        //do the floor now
+
+        tileMap = LevelFunctions.TilePlacementToTileMap(TILE_PLACEMENT.GROUND);
+
+        if (tileMap.GetTile(pos) != null)
+        {
+            tileMap.SetTile(pos, null);
+            return;
+        }
     }
 
     public void SwitchTiles()
@@ -75,12 +95,10 @@ public class LevelEditor : MonoBehaviour
         if(currentTile == tileA)
         {
             currentTile = tileB;
-            Debug.Log("switching to tile B");
         }
         else
         {
             currentTile = tileA;
-            Debug.Log("switching to tile A");
         }
     }
 
@@ -89,58 +107,15 @@ public class LevelEditor : MonoBehaviour
     /// </summary>
     private bool IsTilePlaceable(Vector3Int pos)
     {
-        TileData groundTile = TileSpecificInfo.Instance.GetTileDataDictionaryValue(pos);
-        CustomTile selectedTile = GetCurrentCustomTile();
+        CustomTile selectedTile = LevelManager.Instance.tileIDs.Find(t => t.tile == currentTile);
 
-        //if there is NO tile at location
-        if(groundTile == null)
-        {
-            //Debug.Log("floor tile does not exist on floor at cursor location : " + pos);
-        }
+        //select correct tileMap
+        Dictionary<Vector3Int, TileData> tileData = LevelFunctions.TilePlacementToTileData(selectedTile.tilePlacement);
 
-        switch (selectedTile.tileType)
-        {
-            case TILE_CATEGORIES.SOIL:
+        //get the data from this selected tile
+        TileData currentTileData = tileData.TryGetValue(pos, out TileData value) ? value : null;
 
-                //if there already is a tile in this position
-                if(groundTile != null)
-                {
-                    return false;
-                }
-                break;
-
-            case TILE_CATEGORIES.SEED:
-
-                //check if ground tile is empty
-                if (groundTile == null)
-                {
-                    //Debug.Log("NO PLACEMENT - no tile exists on floor at cursor location" + pos);
-                    return false;
-                }
-
-                //checks if ground can have a seed planted on it
-                if (!groundTile.canSeed)
-                {
-                    //Debug.Log("NO PLACEMENT - floor tile cannot seed");
-                    return false;
-                }
-
-                //soil must be matching current ground
-                if (selectedTile.soilType != groundTile.soilType)
-                {
-                    //Debug.Log("NO PLACEMENT - soil type does not match");
-                    return false; 
-                }
-
-                break;
-
-            case TILE_CATEGORIES.FURNITURE:
-                break;
-
-            case TILE_CATEGORIES.FLOOR:
-                break;
-        }
-
-        return true;
+        //does it pass through placement checks?
+        return LevelFunctions.PassesTilePlacementChecks(selectedTile, currentTileData);
     }
 }
