@@ -118,6 +118,12 @@ public class LevelManager : MonoBehaviour
 
     private void LoadSpecificLevel(Tilemap tileMap, string fileName)
     {
+        if (tileMap == null)
+        {
+            Debug.LogError("Tilemap is null in LoadSpecificLevel.");
+            return;
+
+        }
         //reading json data from file
         string json = File.ReadAllText(Application.dataPath + LEVEL_DATA_FILE_PATH + fileName);
         //converting json data to LevelData object
@@ -131,6 +137,13 @@ public class LevelManager : MonoBehaviour
         {
             //name is the scriptable object name we've given
             CustomTile customTile = tileIDs.Find(t => t.name == data.tiles[i]);
+
+            if (customTile == null)
+            {
+                Debug.LogError($"Custom Tile with ID {data.tiles[i]} not found in tileIDs.");
+                continue;
+            }
+
             tileMap.SetTile(new Vector3Int(data.posX[i], data.posY[i], 0), customTile.tile);
         }
 
@@ -140,7 +153,7 @@ public class LevelManager : MonoBehaviour
 
     private void AddNewCustomTileData(TileMapData levelData, CustomTile tile, int x, int y)
     {
-        levelData.tiles.Add(tile.id);
+        levelData.tiles.Add(tile.name); //hopefully this doesn't fuck things up
         levelData.posX.Add(x);
         levelData.posY.Add(y);
     }

@@ -70,7 +70,7 @@ public class LevelFunctions : MonoBehaviour
                 break;
 
             case TILE_CATEGORIES.FURNITURE:
-                Debug.Log("Passing furniture check");
+                //Debug.Log("Passing furniture check");
                 break;
 
             case TILE_CATEGORIES.FLOOR:

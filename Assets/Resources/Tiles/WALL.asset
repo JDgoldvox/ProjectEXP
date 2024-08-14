@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: WALL
   m_EditorClassIdentifier: 
   tile: {fileID: 11400000, guid: d63e3106e28dd7a46bdcfcd2cd065ebf, type: 2}
-  id: left_wall
+  id: WALLs
   tilePlacement: 1
   tileType: 2
   soilType: 0

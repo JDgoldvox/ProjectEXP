@@ -594,7 +594,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
@@ -1025,7 +1025,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b627f73015479c64cb07958515112099, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentTileMap: {fileID: 1968448816}
   currentTile: {fileID: 11400000, guid: 3f327b22533b7d845965de66082bf827, type: 2}
   tileA: {fileID: 11400000, guid: d63e3106e28dd7a46bdcfcd2cd065ebf, type: 2}
   tileB: {fileID: 11400000, guid: 3f327b22533b7d845965de66082bf827, type: 2}
