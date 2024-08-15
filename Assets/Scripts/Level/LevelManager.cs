@@ -88,16 +88,6 @@ public class LevelManager : MonoBehaviour
                 //add info to our tile list, if no data already exists for this tile
                 if (currentTile != null)
                 {
-                    if (tileMapData == null)
-                    {
-                        Debug.Log("tileMapData is poo poo");
-                    }
-
-                    if (currentCustomTile == null)
-                    {
-                        Debug.Log("Custom tile is poo poo");
-                    }
-
                     AddNewCustomTileData(tileMapData, currentCustomTile, x, y);
                 }
             }

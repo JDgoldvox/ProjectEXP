@@ -7,7 +7,7 @@ using UnityEngine.Tilemaps;
 public class CustomTile : ScriptableObject
 {
     public TileBase tile;
-    public string id;
+    //public string id;
 
     [Tooltip("The type of tile")]
     public TILE_PLACEMENT tilePlacement;

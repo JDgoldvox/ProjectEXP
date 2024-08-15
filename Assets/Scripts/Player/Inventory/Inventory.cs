@@ -11,8 +11,8 @@ public class Inventory : MonoBehaviour
     private const int maxInventorySlots = 40;
     private const int maxHotbarSlots = 10;
 
-    [SerializeField] List<ItemSlot> inventorySlots = new List<ItemSlot>();
-    [SerializeField] List<ItemSlot> hotbarSlots = new List<ItemSlot>();
+    [SerializeField] public List<ItemSlot> inventorySlots = new List<ItemSlot>();
+    [SerializeField] public List<ItemSlot> hotbarSlots = new List<ItemSlot>();
 
     [SerializeField] private GameObject itemPrefab;
 
@@ -72,6 +72,8 @@ public class Inventory : MonoBehaviour
             }
         }
 
+        //update hotbar sprites
+        Hotbar.Instance.UpdateHotbarImagesFromInventoryHotbar();
         return true;
     }
 

@@ -79,7 +79,7 @@ public class TileInfo : MonoBehaviour
         }
         else
         {
-            Debug.Log("Error with adding tile to dictionary");
+            Debug.LogError($"Error with adding tile to dictionary");
         }
 
     }
