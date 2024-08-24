@@ -135,7 +135,7 @@ public class PlayerGeneralInput : MonoBehaviour
         if (context.performed)
         {
             CalculateScreenAndWorldMousePosition();
-            LevelEditor.Instance.PlaceTile();
+            PlayerActions.E_LeftClick.Invoke();
         }
         
     }

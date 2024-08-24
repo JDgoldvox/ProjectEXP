@@ -40,8 +40,6 @@ public class Hotbar : MonoBehaviour
     {
         for(int i = 0; i < hotbarSlots.Count; i++)
         {
-            Debug.Log("Changing Item image");
-
             // Check if the slot has any children before trying to access the first child
             if (Inventory.Instance.hotbarSlots[i].transform.childCount == 0)
             {

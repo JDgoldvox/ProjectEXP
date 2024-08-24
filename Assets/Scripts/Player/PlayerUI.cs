@@ -56,8 +56,8 @@ public class PlayerUI : MonoBehaviour
     {
         if (context.performed)
         {
-            isInventoryClosed = !isInventoryClosed;
             UIEvents.E_OpenAndCloseInventory?.Invoke(isInventoryClosed);
+            isInventoryClosed = !isInventoryClosed;
         }
     }
 }

@@ -18,12 +18,13 @@ public class UIEvents : MonoBehaviour
     {
         if (!isClosed)
         {
+            Debug.Log("Closing");
             S_TabSwitch.CloseCurrentTab();
         }
         else
         {
+            Debug.Log("Opening");
             S_TabSwitch.SwitchToInventory();
         }
-
     }
 }

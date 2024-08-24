@@ -7,15 +7,24 @@ public class PlayerAnimations : MonoBehaviour
     private Animator animator;
     private Rigidbody2D rb;
 
+    private AnimationClip swordSwing;
+    [SerializeField] private Transform MeleeWeapon;
+    //private Animation swordSwingAnimation;
+    [SerializeField] Animator meleeAnimator;
+
     private void Awake()
     {
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
+        //swordSwingAnimation = MeleeWeapon.transform.GetComponent<Animation>();
+
+        PlayerActions.E_MeleeAttack += AttackAnimation;
     }
 
     private void Update()
     {
         WalkAnimation();
+        //AttackAnimation();
     }
 
     private void WalkAnimation()
@@ -31,5 +40,10 @@ public class PlayerAnimations : MonoBehaviour
             animator.SetFloat("xInput", moveInput.x);
             animator.SetFloat("yInput", moveInput.y);
         }
+    }
+
+    private void AttackAnimation()
+    {
+        meleeAnimator.SetTrigger("swing");
     }
 }

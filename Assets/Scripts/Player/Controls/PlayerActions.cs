@@ -1,18 +1,32 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum OBJECT_TYPE
+{
+    SEED, TILE, WEAPON
+}
+
 public class PlayerActions : MonoBehaviour
 {
+    public static PlayerActions Instance;
+    public static Action E_LeftClick;
+
+    public static Action E_MeleeAttack;
+
     PlayerGeneralInput S_PlayerInput;
     Rigidbody2D rb;
 
     private float walkSpeed = 1f;
-    private float runSpeed = 10f;
+    private float runSpeed = 2f;
+
+    OBJECT_TYPE CurrentSelectedObjectType = OBJECT_TYPE.WEAPON; //OBJECT_TYPE.WEAPON;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        E_LeftClick += LeftClickAction;
     }
 
     private void Start()
@@ -22,7 +36,7 @@ public class PlayerActions : MonoBehaviour
 
     private void Update()
     {
-        //Plant();
+        
     }
 
     void FixedUpdate()
@@ -42,16 +56,25 @@ public class PlayerActions : MonoBehaviour
         }
     }
 
+    public void LeftClickAction()
+    {
+        switch(CurrentSelectedObjectType) {
+                case OBJECT_TYPE.WEAPON:
+                MeleeAttack();
+                    break;
+                case OBJECT_TYPE.TILE:
+                    Plant();
+                    break;
+        }
+    }
+
     void Plant()
     {
-        if (S_PlayerInput.leftClickInput)
-        {
-            LevelEditor.Instance.PlaceTile();
-        }
+        LevelEditor.Instance.PlaceTile();
+    }
 
-        if (S_PlayerInput.rightClickInput)
-        {
-            LevelEditor.Instance.SwitchTiles();
-        }
+    void MeleeAttack()
+    {
+        E_MeleeAttack.Invoke();
     }
 }

@@ -35,7 +35,7 @@ public class TabSwitch : MonoBehaviour
 
     private void Awake()
     {
-        currentTab = TAB_NAMES.NONE;
+        currentTab = TAB_NAMES.INVENTORY;
         previousTab = TAB_NAMES.NONE;
 
         tabs = new Dictionary<TAB_NAMES, GameObject>();
