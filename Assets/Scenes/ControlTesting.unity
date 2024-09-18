@@ -2244,6 +2244,7 @@ GameObject:
   - component: {fileID: 1324428284}
   - component: {fileID: 1324428285}
   - component: {fileID: 1324428286}
+  - component: {fileID: 1324428287}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -2505,14 +2506,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4a71fe5e0afd9642ad2574f31e212b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <maxHealth>k__BackingField: 0
-  <currentHealth>k__BackingField: 0
-  <maxMana>k__BackingField: 0
-  <currentMana>k__BackingField: 0
-  <maxEnergy>k__BackingField: 0
-  <currentEnergy>k__BackingField: 0
-  <currentCredits>k__BackingField: 0
+  maxHealth: 1.42
+  currentHealth: 4.94
+  maxMana: 0
+  currentMana: 0
+  maxEnergy: 0
+  currentEnergy: 0
+  currentCredits: 0
   test: 0
+--- !u!114 &1324428287
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1324428275}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ab5261e19cf27942b44b4add9893185, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerCollider: {fileID: 1324428281}
+  takeDamageCooldown: 2
+  damageTimer: 2
+  canTakeDamage: 1
+  isTakeDamageCoroutineRunning: 0
+  player: {fileID: 0}
+  rb: {fileID: 0}
+  knockbackForce: 20
 --- !u!1 &1389566346
 GameObject:
   m_ObjectHideFlags: 0

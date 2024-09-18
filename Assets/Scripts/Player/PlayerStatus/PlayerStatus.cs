@@ -4,18 +4,25 @@ using UnityEngine;
 
 public class PlayerStatus : MonoBehaviour
 {
+    public static PlayerStatus Instance;
+
     [field: Header("Default")]
-    [field: SerializeField] public float maxHealth { get; private set; }
-    [field: SerializeField] public float currentHealth { get; private set; }
-    [field: SerializeField] public float maxMana { get; private set; }
-    [field: SerializeField] public float currentMana { get; private set; }
-    [field: SerializeField] public float maxEnergy { get; private set; }
-    [field: SerializeField] public float currentEnergy { get; private set; }
-    [field: SerializeField] public int currentCredits { get; private set; }
+    [field: SerializeField] public float maxHealth;
+    [field: SerializeField] public float currentHealth;
+    [field: SerializeField] public float maxMana;
+    [field: SerializeField] public float currentMana;
+    [field: SerializeField] public float maxEnergy;
+    [field: SerializeField] public float currentEnergy;
+    [field: SerializeField] public int currentCredits;
 
     List<STATUS> currentStatus;
 
     [field: Header("Default")]
     [SerializeField] private int test;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
 
 }
