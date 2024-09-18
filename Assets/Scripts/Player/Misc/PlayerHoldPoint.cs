@@ -76,17 +76,17 @@ public class PlayerHoldPoint : MonoBehaviour
         else if (currentDirection == Direction.Up)
         {
             toolHolder.position = holdUp.position;
+            toolHolder.localScale = new Vector3(1, 1, 1);
         }
         else
         {
             toolHolder.position = holdDown.position;
+            toolHolder.localScale = new Vector3(1, 1, 1);
         }
     }
-        
 
     private void UpdateHoldPointPosition()
     {
         ChangeHoldPointPosition();
     }
-
 }

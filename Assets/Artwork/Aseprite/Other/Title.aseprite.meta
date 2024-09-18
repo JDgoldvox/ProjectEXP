@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 483a2d3759b943f47ba06311f8d7f938
+guid: 34b1355384c96df49b625f86d3871996
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -120,20 +120,49 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
-  animatedSpriteImportData: []
+  animatedSpriteImportData:
+  - name: Title
+    originalName: 
+    pivot: {x: 0.5, y: 0}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 4
+      width: 128
+      height: 69
+    spriteID: 3b97f4810494e4e41a1ef8bb20efeac3
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 4}
   spriteSheetImportData: []
   asepriteLayers:
   - layerIndex: 0
-    guid: 1912017267
-    name: Hub
+    guid: 433284352
+    name: Title
     layerFlags: 0
     layerType: 0
     blendMode: 0
-    cells: []
+    cells:
+    - name: Title
+      frameIndex: 0
+      additiveSortOrder: 0
+      cellRect:
+        x: 0
+        y: 0
+        width: 128
+        height: 69
+      spriteId: 3b97f4810494e4e41a1ef8bb20efeac3
     linkedCells: []
     parentIndex: -1
   platformSettings: []
   generatePhysicsShape: 0
   secondarySpriteTextures: []
   spritePackingTag: 
-  canvasSize: {x: 640, y: 640}
+  canvasSize: {x: 128, y: 69}

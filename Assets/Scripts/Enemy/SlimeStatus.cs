@@ -15,7 +15,7 @@ public class SlimeStatus : MonoBehaviour
 
     [SerializeField] private Transform player;
     [SerializeField] private Rigidbody2D rb;
-    [SerializeField] private float knockbackForce = 10f;
+    [SerializeField] private float knockbackForce;
 
     private void Awake()
     {
@@ -78,6 +78,9 @@ public class SlimeStatus : MonoBehaviour
     private void TakeKnockBack() 
     {
         Vector3 direction = (transform.position - player.position).normalized;
-        rb.AddForce(direction * knockbackForce, ForceMode2D.Force);
+
+        Debug.Log("direction:" + direction);
+        Debug.Log("Force: " + direction * knockbackForce);
+        rb.AddForce(direction * knockbackForce, ForceMode2D.Impulse);
     }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SlimePathfinding : MonoBehaviour
 {
-    [SerializeField] private float movementSpeed = 10f;
+    [SerializeField] private float movementSpeed;
     [SerializeField] private Transform player;
     [SerializeField] private Rigidbody2D rb;
 
@@ -26,6 +26,11 @@ public class SlimePathfinding : MonoBehaviour
     private void GoTowardsPlayer()
     {
         Vector3 direction = (player.position - transform.position).normalized;
-        rb.velocity = direction * movementSpeed;   
+
+        // Move towards player by modifying the velocity, but add to the current velocity instead of overriding it
+        Vector2 targetVelocity = direction * movementSpeed;
+
+        // Blend between current velocity and target velocity to maintain smooth movement and still allow knockback
+        rb.velocity = Vector2.Lerp(rb.velocity, targetVelocity, Time.fixedDeltaTime * 5f); // Adjust interpolation factor as needed
     }
 }
